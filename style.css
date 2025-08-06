@@ -1,0 +1,112 @@
+/* style.css */
+
+/* 全体の基本設定 */
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #ffffff;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+main section {
+  margin-bottom: 40px;
+}
+
+/* 固定ヘッダー */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 999;
+}
+
+.fixed-header .logo a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #1d4ed8;
+  font-size: 1.2rem;
+}
+
+.fixed-header nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.fixed-header nav ul li {
+  margin-left: 20px;
+}
+
+.fixed-header nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.fixed-header nav ul li a:hover {
+  color: #1d4ed8;
+}
+
+/* メインコンテンツに余白を追加（固定ヘッダー分） */
+main {
+  padding-top: 80px;
+}
+
+/* セクションタイトル */
+section h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #1d4ed8;
+}
+
+/* LINE相談ボタン風セクション */
+#contact {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #e0f2fe;
+}
+
+#contact p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+#contact img {
+  max-width: 200px;
+}
+
+/* フッター */
+footer {
+  background-color: #f3f4f6;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.85rem;
+  color: #555;
+  border-top: 1px solid #ddd;
+}
+
+/* セクションごとの調整 */
+section img.full-width {
+  border: none;
+  background: transparent;
+}
+
+section {
+  padding: 20px;
+  background-color: #ffffff;
+}
