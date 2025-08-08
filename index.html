@@ -2,81 +2,327 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>あきません | 退職サポートサービス</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>あきません｜失業保険延長サポート</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+
+  <!-- スクロールで表示/非表示になる固定ヘッダー -->
   <header class="fixed-header">
-    <div class="logo"><a href="#top">あきません</a></div>
-    <nav>
-      <ul>
-        <li><a href="#support">サポート内容</a></li>
-        <li><a href="#conditions">条件</a></li>
-        <li><a href="#allowance">手当</a></li>
-        <li><a href="#schedule">スケジュール</a></li>
-        <li><a href="#company">会社概要</a></li>
-        <li><a href="#contact">LINE相談</a></li>
-      </ul>
-    </nav>
+    <div class="container">
+      <div class="logo"><a href="#top">あきません</a></div>
+      <nav>
+        <ul>
+          <li><a href="#support">サポート内容</a></li>
+          <li><a href="#conditions">条件</a></li>
+          <li><a href="#allowance">手当</a></li>
+          <li><a href="#schedule">スケジュール</a></li>
+          <li><a href="#support2">追加サポート</a></li>
+          <li><a href="#reemployment">再就職手当</a></li>
+          <li><a href="#case-studies">事例</a></li>
+          <li><a href="#common-problems">よくある悩み</a></li>
+          <li><a href="#depression-info">うつ病について</a></li>
+          <li><a href="#system-flow">制度の流れ</a></li>
+          <li><a href="#final">ご案内</a></li>
+          <li><a href="#about">会社概要</a></li>
+          <li><a href="#contact">LINE相談</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main>
-    <section id="top">
-      <img src="top_page.jpg" alt="トップ画像" class="full-width" />
-    </section>
+  <!-- Hero：背景画像＋見出しのみ（C案） -->
+  <section id="top" class="hero">
+    <div class="container hero-inner">
+      <h1>失業保険、最長<span>28ヶ月</span>の安心を。</h1>
+    </div>
+  </section>
 
-    <section id="support">
-      <img src="サポート内容4,7.8.14.15.jpg" alt="サポート内容" class="full-width" />
-    </section>
+  <!-- Hero下：本文とCTAを分離（かぶり防止） -->
+  <section class="hero-content">
+    <div class="container" style="text-align:center">
+      <p class="hero-subcopy">
+        「あきません」は、社会保険制度を活用して受給期間を最大化。<br>
+        次の一歩に、余裕と選択肢を。
+      </p>
+      <br/>
+      <a class="btn" href="#contact">LINEで無料相談</a>
+    </div>
+  </section>
 
-    <section id="conditions">
-      <img src="page_5_trimmed.jpg" alt="ご利用条件" class="full-width" />
-    </section>
+  <!-- サポート内容 -->
+  <section id="support" class="section">
+    <div class="container">
+      <h2 class="section-title">サポート内容</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>失業保険の期間延長</h3>
+          <p>通常3ヶ月の受給を、要件に応じて最長28ヶ月まで延ばすための申請設計と並走サポート。</p>
+        </article>
+        <article class="card">
+          <h3>手続きの伴走・代行</h3>
+          <p>申請準備から記入・提出まで、つまずきやすいポイントをプロが伴走（必要に応じて代行）。</p>
+        </article>
+        <article class="card">
+          <h3>再就職サポート</h3>
+          <p>カウンセリング、書類作成、面接対策、求人紹介。あなたに合うペースで復職を後押しします。</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    <section id="allowance">
-      <img src="page_6_trimmed.jpg" alt="手当について" class="full-width" />
-    </section>
+  <!-- 利用条件 -->
+  <section id="conditions" class="section">
+    <div class="container">
+      <h2 class="section-title">利用条件（主な例）</h2>
+      <ul class="feature-list">
+        <li>雇用保険の被保険者であった期間が一定以上ある</li>
+        <li>退職後、就職活動を行う意思がある</li>
+        <li>必要書類（離職票・診断書 等）の提出ができる</li>
+      </ul>
+      <p class="note">※個別条件により適用可否が異なります。まずは無料相談で確認ください。</p>
+    </div>
+  </section>
 
-    <section id="schedule">
-      <img src="page_10_trimmed.jpg" alt="スケジュール" class="full-width" />
-    </section>
+  <!-- 手当について -->
+  <section id="allowance" class="section">
+    <div class="container">
+      <h2 class="section-title">手当について</h2>
+      <div class="grid-2">
+        <div>
+          <h3>失業保険</h3>
+          <p>離職理由・加入年数などに応じて、基本手当日額の50〜80%が支給されます。</p>
+        </div>
+        <div>
+          <h3>社会保険の活用</h3>
+          <p>適用により受給期間の延長が可能。最長で28ヶ月相当の支えに。</p>
+        </div>
+      </div>
+      <table class="info-table">
+        <thead>
+          <tr><th>区分</th><th>支給目安</th><th>期間</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>失業保険</td><td>基本手当日額の50〜80%</td><td>通常3ヶ月（条件で延長）</td></tr>
+          <tr><td>延長活用時</td><td>上記＋制度適用分</td><td>最長28ヶ月相当</td></tr>
+        </tbody>
+      </table>
+      <p class="caption">※上記は目安です。詳細はヒアリングの上で個別ご案内します。</p>
+    </div>
+  </section>
 
-    <section id="reemployment">
-      <img src="page_9_trimmed.jpg" alt="再就職手当について" class="full-width" />
-    </section>
+  <!-- スケジュール -->
+  <section id="schedule" class="section">
+    <div class="container">
+      <h2 class="section-title">サポートスケジュール</h2>
+      <p class="section-lead">ご相談から給付・再就職までの一般的な流れです。状況により順序や回数は前後します。</p>
 
-    <section id="cases">
-      <img src="page_13_trimmed.jpg" alt="事業例" class="full-width" />
-    </section>
+      <div class="flow">
+        <div class="flow-lane">
+          <h3 class="flow-title">ケースA：給付を最後まで受ける</h3>
+          <ol class="flow-steps">
+            <li class="flow-step">退職</li>
+            <li class="flow-step">離職票 受理・提出（ハローワーク）</li>
+            <li class="flow-step">待期期間 7日</li>
+            <li class="flow-step">就職活動</li>
+            <li class="flow-step">失業認定 → 給付（繰り返し）</li>
+            <li class="flow-step is-end">支給終了</li>
+          </ol>
+        </div>
+        <div class="flow-lane">
+          <h3 class="flow-title">ケースB：途中で再就職手当</h3>
+          <ol class="flow-steps">
+            <li class="flow-step">退職</li>
+            <li class="flow-step">離職票 受理・提出（ハローワーク）</li>
+            <li class="flow-step">待期期間 7日</li>
+            <li class="flow-step">就職活動</li>
+            <li class="flow-step">内定（所定日数の一定以上を残す）</li>
+            <li class="flow-step is-end">再就職手当 受給（⼀括）</li>
+          </ol>
+        </div>
+      </div>
+      <p class="note">※ 実際の認定日・必要書類・給付率は個々の条件によって異なります。</p>
+    </div>
+  </section>
 
-    <section id="concerns">
-      <img src="page_11_trimmed.jpg" alt="こんなことありませんか？" class="full-width" />
-    </section>
+  <!-- 追加サポート -->
+  <section id="support2" class="section">
+    <div class="container">
+      <h2 class="section-title">追加サポート</h2>
+      <div class="grid-2">
+        <ul class="feature-list">
+          <li>職務経歴書・履歴書の作成支援</li>
+          <li>面接対策（オンライン/対面）</li>
+          <li>求人情報の提供とマッチング</li>
+        </ul>
+        <ul class="feature-list">
+          <li>定期カウンセリング</li>
+          <li>就職後の定着フォロー</li>
+          <li>必要に応じて専門機関と連携</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <section id="depression">
-      <img src="page_12_trimmed.jpg" alt="うつ病について" class="full-width" />
-    </section>
+  <!-- 再就職手当 -->
+  <section id="reemployment" class="section">
+    <div class="container">
+      <h2 class="section-title">再就職手当について</h2>
+      <p>早期に安定就職が決まった場合、失業保険の残日数に応じて一時金が支給される制度です。</p>
+      <div class="grid-2">
+        <div>
+          <h3>主な条件（例）</h3>
+          <ul class="feature-list">
+            <li>待期期間終了後、所定給付日数の一定以上を残して就職</li>
+            <li>1年以上の雇用見込み など</li>
+            <li>過去3年以内に同手当の受給がない</li>
+          </ul>
+        </div>
+        <div>
+          <h3>支給額のイメージ</h3>
+          <p>基本手当日額 × 残日数 × 給付率（残日数により60% or 70% など）</p>
+        </div>
+      </div>
+      <p class="caption">※支給要件や給付率は個別に算定します。詳細はお問い合わせください。</p>
+    </div>
+  </section>
 
-    <section id="info">
-      <img src="page_14_trimmed.jpg" alt="補足情報1" class="full-width" />
-      <img src="page_15_trimmed.jpg" alt="補足情報2" class="full-width" />
-    </section>
+  <!-- 事例 -->
+  <section id="case-studies" class="section">
+    <div class="container">
+      <h2 class="section-title">事例</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>長期療養からの復職</h3>
+          <p>延長制度で生活の安定を確保し、段階的に復職。無理のない働き方を実現。</p>
+        </article>
+        <article class="card">
+          <h3>キャリアチェンジ</h3>
+          <p>職業訓練と制度活用で、異業種へスムーズに転身。収入の底上げにも成功。</p>
+        </article>
+        <article class="card">
+          <h3>地方移住と就職</h3>
+          <p>移住前後のブランクを制度でカバー。新天地での就業を着実にサポート。</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-    <section id="company">
-      <img src="page_18_trimmed.jpg" alt="会社概要1" class="full-width" />
-      <img src="page_2_trimmed.jpg" alt="会社概要2" class="full-width" />
-      <img src="page_3_trimmed.jpg" alt="会社概要3" class="full-width" />
-    </section>
+  <!-- こんなことありませんか？ -->
+  <section id="common-problems" class="section">
+    <div class="container">
+      <h2 class="section-title">こんなことありませんか？</h2>
+      <ul class="check-list">
+        <li>退職後の生活が不安で一歩踏み出せない</li>
+        <li>失業保険は3ヶ月しかもらえないと思っている</li>
+        <li>体調を整える時間も、就活の時間も足りない</li>
+        <li>再就職の選択肢を広げたい</li>
+      </ul>
+      <p class="note">不安を一人で抱え込まないでください。まずは現状ヒアリングから。</p>
+    </div>
+  </section>
 
-    <section id="contact">
-      <p>LINEでのご相談はこちらから</p>
-      <img src="line_qr.png" alt="LINE QRコード" />
-    </section>
-  </main>
+  <!-- うつ病について -->
+  <section id="depression-info" class="section">
+    <div class="container">
+      <h2 class="section-title">うつ病について</h2>
+      <p>うつ病は働く世代にも多く見られ、退職・転職のきっかけになることがあります。適切な治療とサポートがあれば回復は可能です。</p>
+      <div class="info-box">
+        <h3>よくあるサイン</h3>
+        <ul>
+          <li>意欲低下・倦怠感が続く</li>
+          <li>睡眠リズムの乱れ</li>
+          <li>集中力の低下・ミスの増加</li>
+        </ul>
+        <p class="note">専門機関の受診や、公的制度の活用を一緒に検討します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 制度活用の流れ・注意点 -->
+  <section id="system-flow" class="section">
+    <div class="container">
+      <h2 class="section-title">制度の流れと注意点</h2>
+      <ol class="steps">
+        <li><strong>ヒアリング</strong>：状況把握・要件の確認</li>
+        <li><strong>申請設計</strong>：必要書類の準備・スケジュール化</li>
+        <li><strong>申請・認定</strong>：提出と認定対応（繰り返し）</li>
+        <li><strong>給付</strong>：最長期間の受給を目指す／早期就職は手当へ</li>
+      </ol>
+      <div class="warn-list">
+        <h3>注意点</h3>
+        <ul>
+          <li>手続きや認定には期限あり。早めの準備が重要</li>
+          <li>離職票や診断書など必要書類の不備は遅延の原因</li>
+          <li>条件により給付率・期間が変動します</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ご案内 -->
+  <section id="final" class="section">
+    <div class="container" style="text-align:center">
+      <h2 class="section-title">まずは無料相談から</h2>
+      <p>状況をうかがい、最適な活用プランをご提案します。制度の難しさは私たちが引き受けます。</p>
+      <a class="btn" href="#contact">LINEで相談する</a>
+    </div>
+  </section>
+
+  <!-- 会社概要 -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">会社概要</h2>
+      <table class="info-table">
+        <tbody>
+          <tr><th>会社名</th><td>あきません株式会社</td></tr>
+          <tr><th>所在地</th><td>大阪府大阪市...</td></tr>
+          <tr><th>設立</th><td>2025年1月</td></tr>
+          <tr><th>事業内容</th><td>失業保険延長サポート事業</td></tr>
+          <tr>
+            <th>運営元</th>
+            <td><a href="https://yumeyahonpo.jp/" target="_blank" rel="noopener noreferrer">夢屋本舗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- LINE相談 -->
+  <section id="contact" class="section">
+    <div class="container contact">
+      <p>LINEでお気軽にご相談ください</p>
+      <img src="line_qr.png" alt="LINE QRコード">
+    </div>
+  </section>
 
   <footer>
-    <p>&copy; 2025 あきません All Rights Reserved.</p>
+    <div class="container">
+      <p>© 2025 あきません. All rights reserved.</p>
+    </div>
   </footer>
+
+  <!-- JS：スクロール方向でヘッダー表示/非表示 -->
+  <script>
+    let lastScroll = 0;
+    const header = document.querySelector('.fixed-header');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll <= 0) {
+        header.classList.remove('show'); // 一番上なら隠す
+        return;
+      }
+      if (currentScroll > lastScroll) {
+        header.classList.remove('show'); // 下スクロールで隠す
+      } else {
+        header.classList.add('show');    // 上スクロールで表示
+      }
+      lastScroll = currentScroll;
+    });
+  </script>
+
 </body>
 </html>
