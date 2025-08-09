@@ -29,7 +29,7 @@ p.note,.caption,.section-lead{ color:var(--muted); }
 /* =============== Header（スクロールで表示/非表示） =============== */
 .fixed-header{
   position: fixed;
-  top: -80px;              /* 初期は非表示 */
+  top: -80px;              
   left: 0; width: 100%;
   z-index: 999;
   background: rgba(255,255,255,.95);
@@ -69,18 +69,16 @@ p.note,.caption,.section-lead{ color:var(--muted); }
 
 /* =============== Hero（画像＋見出しのみ／見切れ防止） =============== */
 .hero{
-  /* 上側もしっかり確保、下側はさらに広めに（見切れ保険） */
-  padding: clamp(120px, 18vw, 240px) 0 clamp(160px, 14vw, 240px);
+  padding: clamp(120px, 18vw, 240px) 0 clamp(160px, 14vw, 260px);
   min-height: 62vh;
   background-image: url("page_1_trimmed.jpg");
   background-size: cover;
-  background-position: top center; /* 上端優先 */
+  background-position: top center;
   background-repeat: no-repeat;
   position: relative; text-align:center;
 }
 .hero::after{
   content:""; position:absolute; inset:0;
-  /* 下に向けて白へフェード。94%まで透明で画像の文字を覆わない */
   background: linear-gradient(
     180deg,
     rgba(0,0,0,.28) 0%,
@@ -111,7 +109,7 @@ p.note,.caption,.section-lead{ color:var(--muted); }
   box-shadow: 0 4px 12px rgba(0,0,0,.15);
   line-height:1.7;
 }
-.hero-content .lead{ /* 使わない場合もあるが互換のため残す */
+.hero-content .lead{
   margin: 0 auto 18px; max-width: 760px;
   font-size: clamp(14px, 1.8vw, 18px); color:#1f2937;
 }
@@ -157,87 +155,35 @@ p.note,.caption,.section-lead{ color:var(--muted); }
   padding:18px; box-shadow:var(--shadow);
 }
 
-/* =============== フロー図（スケジュール：左右2列 × 縦矢印） =============== */
-.section-lead{
-  color:var(--muted);
-  margin:-4px 0 20px;
-}
-.flow{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:28px;
-}
-.flow-lane{
-  background:#fff;
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:18px 18px 8px;
-  box-shadow:var(--shadow);
-}
-.flow-title{
-  margin:0 0 12px;
-  font-size:1.05rem;
-  color:var(--ink);
-  text-align:center;
-}
-.flow-steps{
-  list-style:none;
-  margin:0;
-  padding:6px 10px;
-}
+/* =============== フロー図（スケジュール） =============== */
+.section-lead{ color:var(--muted); margin:-4px 0 20px; }
+.flow{ display:grid; grid-template-columns: 1fr 1fr; gap:28px; }
+.flow-lane{ background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:18px 18px 8px; box-shadow:var(--shadow); }
+.flow-title{ margin:0 0 12px; font-size:1.05rem; color:var(--ink); text-align:center; }
+.flow-steps{ list-style:none; margin:0; padding:6px 10px; }
 .flow-step{
   position:relative;
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  border-radius:12px;
-  padding:12px 14px;
-  margin:0 0 26px;
-  color:#0f172a;
-  font-size:.97rem;
-  text-align:center;
+  background:#f8fafc; border:1px solid #e5e7eb; border-radius:12px;
+  padding:12px 14px; margin:0 0 26px;
+  color:#0f172a; font-size:.97rem; text-align:center;
 }
 .flow-step::after{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-18px;
-  transform:translateX(-50%);
-  width:2px;
-  height:18px;
-  background:#cbd5e1;
+  content:""; position:absolute; left:50%; bottom:-18px;
+  transform:translateX(-50%); width:2px; height:18px; background:#cbd5e1;
 }
 .flow-step::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  bottom:-18px;
+  content:""; position:absolute; left:50%; bottom:-18px;
   transform:translate(-50%,6px) rotate(135deg);
-  width:8px;
-  height:8px;
-  border-top:2px solid #cbd5e1;
-  border-right:2px solid #cbd5e1;
+  width:8px; height:8px; border-top:2px solid #cbd5e1; border-right:2px solid #cbd5e1;
 }
 .flow-step:last-child::after,
-.flow-step:last-child::before{
-  display:none;
-}
-.flow-step.is-end{
-  background:#eff6ff;
-  border-color:#bfdbfe;
-  color:#1e40af;
-  font-weight:700;
-}
-@media (max-width:960px){
-  .flow{ grid-template-columns:1fr; }
-}
+.flow-step:last-child::before{ display:none; }
+.flow-step.is-end{ background:#eff6ff; border-color:#bfdbfe; color:#1e40af; font-weight:700; }
+@media (max-width:960px){ .flow{ grid-template-columns:1fr; } }
 
 /* CTA / 相談 */
-.contact{
-  display:flex; flex-direction:column; align-items:center; gap:18px;
-}
-#contact img{
-  max-width:200px; box-shadow:none; border:1px solid var(--line);
-}
+.contact{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+#contact img{ max-width:200px; box-shadow:none; border:1px solid var(--line); }
 
 /* フッター */
 footer{
@@ -251,23 +197,46 @@ footer{
 @media (max-width:960px){
   .cards{ grid-template-columns:1fr; }
   .grid-2{ grid-template-columns:1fr; }
-  .hero{
-    padding-bottom: max(30vh, 240px); /* モバイルは下をさらに確保 */
-    min-height: 70vh;
-  }
+  .hero{ padding-bottom: max(30vh, 260px); min-height: 70vh; }
 }
 
 /* =============== 内部リンクのずれ対策 =============== */
 [id]{ scroll-margin-top: 84px; }
-
-/* 交互背景でメリハリ */
 .section:nth-of-type(even){ background: var(--bg-soft); }
-
-/* 読み幅を絞って密度感UP */
 .section .container > p,
 .section .container > ul,
 .section .container > div,
 .hero-content .lead{
   max-width: 760px;
   margin-left:auto; margin-right:auto;
+}
+
+/* =============== 会社概要テーブル =============== */
+#about table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+#about th, #about td{
+  border: 1px solid var(--line);
+  padding: 12px 14px;
+  text-align: left;
+}
+#about th{
+  background-color: #f8fafc;
+  width: 25%;
+  font-weight: 700;
+  color: var(--ink);
+}
+#about td a{
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+#about td a:hover{
+  text-decoration: underline;
 }
