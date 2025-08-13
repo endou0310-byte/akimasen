@@ -135,9 +135,60 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   .support-v2 .cards{grid-template-columns:1fr}
 }
 @media (max-width:640px){
+  
   .pricing-grid{grid-template-columns:1fr}
   .check-grid{grid-template-columns:1fr}
 }
+  /* ===== Mobile (～640px) ヘッダー調整 ===== */
+@media (max-width: 640px){
+
+  /* ヘッダー行間・余白を少し詰める */
+  .tocbar .tocwrap{
+    gap: 8px;
+    padding: .5rem .75rem;
+    flex-wrap: wrap;   /* 2段構成にする（ブランド/CTA行 + ナビ行） */
+  }
+
+  /* 左のブランド名は一行固定。サブタイトルは隠す */
+  .tocbar .brand{
+    font-size: 14px;
+    white-space: nowrap;     /* 1行で保持、文字の縦割れ防止 */
+    flex: 0 0 auto;
+  }
+  .tocbar .brand span:last-child{ display:none; } /* 「失業保険延長サポート」はスマホで非表示 */
+
+  /* 右のLINEボタンはそのまま右端に寄せる・小さめに */
+  .tocbar .cta-group{
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+  .tocbar .btn{ padding: .45rem .8rem; font-size: 14px; }
+
+  /* ナビを2段目・横スクロールできるチップバーに */
+  .tocbar .tocnav{
+    order: 3;                    /* 2段目に配置 */
+    flex: 1 1 100%;
+    justify-content: flex-start; /* 左寄せ */
+    flex-wrap: nowrap;           /* 折り返させない */
+    overflow-x: auto;            /* 横スクロール */
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding: .25rem 0 .35rem;
+    margin: 0 -0.75rem;          /* 端までスワイプしやすいよう左右を広げる */
+  }
+  .tocbar .tocnav::-webkit-scrollbar{ display:none; } /* スクロールバー非表示 */
+
+  /* 各リンクは1行固定（縦割れ防止） */
+  .tocbar .tocnav a{
+    white-space: nowrap;         /* ここが重要：1文字ずつの縦割れを防止 */
+    display: inline-flex;
+    padding: .4rem .6rem;
+    font-size: 14px;
+    border-radius: 999px;
+    flex: 0 0 auto;              /* 横幅は自分サイズ、折り返さない */
+  }
+}
+
   </style>
 </head>
 <body>
