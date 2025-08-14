@@ -189,7 +189,154 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   }
 }
 
-  </style>
+  
+
+/* === Proof strip (trust badges) === */
+.proof-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  max-width:1100px;margin:14px auto 0;padding:10px}
+.proof-i{background:#fff;border:1px solid #e7eef8;border-radius:12px;padding:12px;
+  display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center}
+.proof-i span{font-size:22px}
+.proof-i b{color:#0f2a4b}
+.proof-i small{color:#6b7280}
+@media(max-width:640px){.proof-strip{grid-template-columns:1fr}}
+
+/* === Floating CTA === */
+.float-cta{position:fixed;right:14px;bottom:16px;z-index:1000;
+  padding:.9rem 1.1rem;border-radius:999px;background:#00B900;color:#fff;font-weight:900;
+  box-shadow:0 12px 28px rgba(0,0,0,.18);transition:transform .15s,box-shadow .15s}
+.float-cta:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(0,0,0,.22)}
+
+/* === Section heading rhythm === */
+.section h2{position:relative;padding-top:18px;margin:0 0 14px;color:#0f2a4b}
+.section h2::before{content:"";position:absolute;top:0;left:0;width:48px;height:4px;border-radius:2px;background:#1b7fc5}
+.section .subhead{color:#64748b;font-weight:700;margin:-6px 0 10px;font-size:.95rem}
+
+/* === Voices === */
+.voice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.voice{background:#fff;border:1px solid #e6edf5;border-radius:12px;padding:14px}
+.voice figcaption{font-weight:900;color:#0f2a4b;margin-bottom:6px}
+.voice blockquote{margin:0;color:#374151;line-height:1.7}
+@media(max-width:820px){.voice-grid{grid-template-columns:1fr}}
+
+/* === FAQ === */
+.faq details{background:#fff;border:1px solid #e6edf5;border-radius:10px;padding:10px 12px;margin:8px 0}
+.faq summary{cursor:pointer;font-weight:900;color:#0f2a4b}
+.faq-more{margin-top:8px;text-align:center}
+.faq-more button{padding:.6rem 1rem;border-radius:999px;border:1px solid #cfe3ff;background:#eaf4ff;color:#1b7fc5;font-weight:900}
+
+/* === Logos row === */
+.logo-row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;opacity:.85}
+.logo-row img{height:28px;filter:grayscale(1)}
+
+/* === Micro interactions === */
+a, .btn { transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,.08) }
+.btn:active { transform: translateY(0) }
+
+/* === KPI counter === */
+.kpi-item .num { min-height: 2.2em; }
+.count { font-size: 40px; font-weight: 900; color:#1b7fc5; display:inline-block; }
+@media (max-width:640px){ .count{font-size:34px} }
+
+/* === Flow mini + accordion === */
+.flow-mini{
+  background:#fff; border:1px solid #e6edf5; border-radius:12px;
+  padding:12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; margin-bottom:12px;
+}
+.flow-mini .chip{
+  display:inline-flex; align-items:center; gap:6px;
+  background:#f3f8ff; border:1px solid #d8e9ff; color:#0f2a4b;
+  border-radius:999px; padding:8px 12px; font-weight:800;
+}
+.flow-mini .ico{line-height:1}
+.flow-mini .arrow{color:#96a5b5; font-weight:900; padding:0 2px}
+.flow-toggle{
+  margin-left:8px; padding:.5rem .9rem; border-radius:999px; border:1px solid #b9d6ff;
+  background:#e8f3ff; color:#1b7fc5; font-weight:800; cursor:pointer;
+}
+.flow-toggle:focus-visible{outline:3px solid #90caf9; outline-offset:2px}
+.flow-detail.is-collapsed .lane{ display:none; }
+.flow-detail.is-open .lane{ display:block; }
+
+
+
+/* === First Impression Pack: spacing, type, buttons === */
+:root{ --space:32px; --space-sm:20px; }
+.section{ padding: var(--space) 0 var(--space-sm); }
+.section h2{ color:#0d1b3f; letter-spacing:.01em; }
+
+.btn{ border-radius:999px; padding:.85rem 1.2rem; font-weight:900; box-shadow:0 8px 18px rgba(0,0,0,.08); }
+.btn:hover{ transform:translateY(-1px); box-shadow:0 12px 24px rgba(0,0,0,.12); }
+a, .btn { transition: transform .12s ease, box-shadow .12s ease, background-color .12s ease; }
+
+/* === Hero rhythm and badge emphasis === */
+.hero .hero-figure{ margin:.6rem auto 1rem; }
+.hero .cta-under{ margin-top:10px; }
+.hero-badge .b-num{ font-size:3.1rem; }
+@media (max-width:640px){ .hero-badge .b-num{ font-size:2.4rem; } }
+
+/* === Proof strip tone adjust === */
+.proof-i{ background:#fafdff; border-color:#e5effa; }
+
+/* === Nav scrolled state === */
+.tocbar{ transition: background-color .18s ease, box-shadow .18s ease; }
+.tocbar.is-scrolled{ background:rgba(255,255,255,.96); box-shadow:0 6px 20px rgba(0,0,0,.06); }
+
+
+
+/* === Trust visuals & subtle interactions === */
+/* Quote mark for voices */
+.voice blockquote{ position:relative; padding-left:26px; }
+.voice blockquote:before{ content:"“"; position:absolute; left:0; top:-4px; font-size:28px; opacity:.25; }
+/* Logos: grayscale -> color on hover */
+.logo-row img{ filter:grayscale(1); opacity:.85; transition:filter .15s, opacity .15s; }
+.logo-row img:hover{ filter:none; opacity:1; }
+
+/* === Reveal animation === */
+.reveal{ opacity:0; transform:translateY(8px); transition:opacity .34s ease, transform .34s ease; }
+.reveal.is-in{ opacity:1; transform:none; }
+
+
+
+/* === Limited-time strip (scarcity & countdown) === */
+.limit-strip{padding:18px 0}
+.limit-inner{max-width:1100px;margin:0 auto;border:1px solid #d9e9ff;background:#f7fbff;border-radius:14px;
+  display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px}
+.limit-badge{background:#1b7fc5;color:#fff;font-weight:900;border-radius:999px;padding:.35rem .75rem;letter-spacing:.04em}
+.limit-text strong{color:#0f2a4b;font-size:1.05rem}
+.limit-text small{display:block;color:#64748b;margin-top:2px}
+.limit-cta{white-space:nowrap}
+@media(max-width:720px){
+  .limit-inner{grid-template-columns:1fr;text-align:center}
+  .limit-cta{justify-self:center}
+}
+
+/* === FAQ: icon + 2-line summary clamp === */
+.faq details{display:block}
+.faq summary{display:block; position:relative; padding-left:28px; line-height:1.5; }
+.faq summary:before{content:"❓"; position:absolute; left:0; top:0; opacity:.6}
+.faq summary{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.faq details[open] summary{ -webkit-line-clamp:unset; }
+.faq details:hover summary{ color:#0f2a4b; }
+
+/* === Pricing: featured plan emphasis === */
+.price-card.-featured{ border-color:#8cc4ff; box-shadow:0 16px 40px rgba(27,127,197,.18); transform:translateY(-2px); }
+.price-card.-featured .price-head{ background:linear-gradient(180deg,#2ea0d4,#1b7fc5); }
+.price-card.-featured .price-head:after{
+  content:"おすすめ"; display:inline-block; margin-left:8px; font-size:.85rem; font-weight:900;
+  background:#fff; color:#1b7fc5; padding:.12rem .45rem; border-radius:6px; border:1px solid #cfe3ff;
+}
+.price-card.-featured .price-body{ background:#fbfdff; }
+
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<meta property="og:title" content="失業保険を最大28ヶ月延長｜無料相談">
+<meta property="og:description" content="受給期間の延長・傷病手当の併用などを専門家がサポート。まずは無料相談。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
 </head>
 <body>
 
@@ -217,10 +364,30 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   <a class="cta" href="https://line.me/R/ti/p/@yourid" target="_blank" rel="noopener">まずは無料相談</a>
 </header>
 
+<section class="limit-strip section" aria-label="限定案内" data-spots="8">
+  <div class="limit-inner">
+    <div class="limit-badge">今月限定</div>
+    <div class="limit-text">
+      <strong>無料相談 受付枠：あと <span class="spots-left">8</span> 名</strong>
+      <small>締切まで <span class="dd">--</span>日 <span class="hh">--</span>時間 <span class="mm">--</span>分</small>
+    </div>
+    <a class="btn limit-cta" href="https://line.me/R/ti/p/@yourid" target="_blank" rel="noopener">今すぐ予約</a>
+  </div>
+</section>
+
+
+
+<section class="proof-strip section reveal" aria-label="安心の取り組み">
+  <div class="proof-i"><span>🗺️</span><b>全国対応</b><small>47都道府県どこでも</small></div>
+  <div class="proof-i"><span>💸</span><b>返金保証</b><small>条件不成立なら全額返金</small></div>
+  <div class="proof-i"><span>🔒</span><b>情報保護</b><small>プライバシー重視</small></div>
+</section>
+
+
 <div class="container">
 
   <!-- ① サポート内容（完全再現） -->
-  <section id="support-details-v2" class="support-v2">
+  <section id="support-details-v2" class="support-v2 reveal">
     <h2 class="cap">サポート内容</h2>
     <p class="lead">
       通常は3ヶ月しか受給できない失業手当を、 社会保険を活用して<br>
@@ -247,19 +414,19 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
   <!-- ② 実績と信頼（完全再現） -->
-  <section id="kpi-v2" class="kpi-v2">
+  <section id="kpi-v2" class="kpi-v2 reveal">
     <h2>実績と信頼</h2>
     <div class="kpi-grid">
       <div class="kpi-item">
-        <div class="num">1,200件</div>
+        <div class="num"><span class="count" data-to="1200" data-duration="1500" data-suffix="件">1,200</span></div>
         <div class="cap">累計相談件数</div>
       </div>
       <div class="kpi-item">
-        <div class="num">1日以内</div>
+        <div class="num"><span class="count" data-to="1" data-duration="1200" data-suffix="日以内">1</span></div>
         <div class="cap">平均回答時間</div>
       </div>
       <div class="kpi-item">
-        <div class="num">96%</div>
+        <div class="num"><span class="count" data-to="96" data-duration="1400" data-suffix="%">96</span></div>
         <div class="cap">利用者満足度</div>
       </div>
     </div>
@@ -269,7 +436,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
   <!-- ③ 当サポートが選ばれる理由（完全再現） -->
-  <section id="reasons-v2" class="reasons-v2">
+  <section id="reasons-v2" class="reasons-v2 reveal">
     <h2>当サポートが選ばれる理由</h2>
     <div class="reason-pills">
       <div class="pill">全国対応＆オンライン完結</div>
@@ -280,7 +447,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
   <!-- ④ 各手当の申請条件（完全再現） -->
-  <section id="elig-v2" class="elig-v2">
+  <section id="elig-v2" class="elig-v2 reveal">
     <h2>各手当の申請条件</h2>
     <div class="elig-wrap">
       <!-- 傷病手当 -->
@@ -315,7 +482,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
 <!-- ⑤ 失業手当について（SVGアイコン／再就職手当説明つき・完全統合版） -->
-<section id="allowance" class="unemp-v2">
+<section id="allowance" class="unemp-v2 reveal">
   <!-- アイコンスプライト（このページ内に1回あればOK） -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
     <!-- コイン -->
@@ -378,6 +545,20 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   <h2 class="cap">失業手当について</h2>
   <p class="lead">雇用保険制度に基づき、会社を退職して転職活動を行う際に受給できる手当です。</p>
 
+<!-- 先に「全体の流れ」だけを見せるミニ版 -->
+<div class="flow-mini">
+  <div class="chip"><span class="ico">📄</span><span>離職票提出</span></div>
+  <span class="arrow">›</span>
+  <div class="chip"><span class="ico">⏳</span><span>待期7日</span></div>
+  <span class="arrow">›</span>
+  <div class="chip"><span class="ico">🧾</span><span>初回認定</span></div>
+  <span class="arrow">›</span>
+  <div class="chip"><span class="ico">💴</span><span>給付/手当</span></div>
+  <button class="flow-toggle" type="button" aria-expanded="false" aria-controls="flow-detail">詳しく見る</button>
+</div>
+
+
+
   <!-- KPIカード -->
   <div class="unemp-cards">
     <div class="unemp-card">
@@ -401,7 +582,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </div>
 
   <!-- ▼ 退職後の流れ -->
-  <div class="flow-wrap">
+  <div class="flow-wrap flow-detail is-collapsed" id="flow-detail">
     <h3 class="flow-cap">退職後の流れ</h3>
 
     <!-- レーンA：給付を受け切ってから再就職 -->
@@ -601,7 +782,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
 </style>
 
 <!-- ▼ サービス内容（28ヶ月・10ヶ月サポート） -->
-<section class="support-plan">
+<section class="support-plan reveal">
   <h2 class="cap">サポートプラン概要</h2>
 
   <div class="plan-cards">
@@ -746,7 +927,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
           </ul>
         </div>
       </article>
-      <article class="price-card">
+      <article class="price-card -featured">
         <div class="price-head blue">PLAN　カード一括支払い</div>
         <div class="price-body">
           <div class="price-num">
@@ -792,7 +973,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
           </ul>
         </div>
       </article>
-      <article class="price-card">
+      <article class="price-card -featured">
         <div class="price-head blue">PLAN　カード一括支払い</div>
         <div class="price-body">
           <div class="price-num">
@@ -822,7 +1003,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </div>
   <!-- ▲ 料金プラン：10ヶ月 ▲ -->
 <!-- ▼ ご利用者様の受給事例（見やすさ重視リデザイン版） -->
-<section id="cases" class="cases v2">
+<section id="cases" class="cases v2 reveal">
   <header class="cases-head">
     <div class="cases-icon">ⓘ</div>
     <h2>ご利用者様の受給事例</h2>
@@ -924,7 +1105,46 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
 
   </div>
 
-  <footer class="cases-cta">
+  
+<section class="voices section reveal" aria-label="お客様の声">
+  <h2>ご利用者の声</h2><p class="subhead">満足度96%の理由</p>
+  <div class="voice-grid">
+    <figure class="voice"><figcaption>東京都・A様（32）</figcaption>
+      <blockquote>最初の相談から丁寧で、手続きの不安が消えました。</blockquote>
+    </figure>
+    <figure class="voice"><figcaption>大阪府・B様（41）</figcaption>
+      <blockquote>想定より長く受給でき、転職活動に集中できました。</blockquote>
+    </figure>
+    <figure class="voice"><figcaption>福岡県・C様（46）</figcaption>
+      <blockquote>質問への返信が早くて心強かったです。</blockquote>
+    </figure>
+  </div>
+</section>
+
+
+<section class="logos section reveal" aria-label="掲載・監修">
+  <h2>掲載・ご紹介</h2>
+  <div class="logo-row">
+    <img src="img/logo_sample1.svg" alt="〇〇新聞" loading="lazy">
+    <img src="img/logo_sample2.svg" alt="△△メディア" loading="lazy">
+    <img src="img/logo_sample3.svg" alt="□□WEB" loading="lazy">
+  </div>
+</section>
+
+
+<section class="faq section reveal" aria-label="よくある質問">
+  <h2>よくある質問</h2>
+  <details open><summary>診断書はどのタイミングで必要？</summary><div>申請前にご用意ください。取得方法も案内します。</div></details>
+  <details><summary>45歳以上の延長は何ヶ月？</summary><div>最大30ヶ月のケースがあります（条件あり）。</div></details>
+  <details><summary>支払い方法は？</summary><div>カード・振込に対応しています。</div></details>
+  <div class="faq-more"><button id="faqMore" type="button">もっと見る</button></div>
+  <div id="faqHidden" hidden>
+    <details><summary>地方でも対応可能？</summary><div>全国対応です。オンラインで完結します。</div></details>
+    <details><summary>相談は本当に無料？</summary><div>初回相談は無料です。</div></details>
+  </div>
+</section>
+
+<footer class="cases-cta">
     <p>「自分ならどのくらい？」が気になる方へ</p>
     <a href="#symptoms" class="btn-primary">無料で目安を知る（相談）</a>
   </footer>
@@ -1044,7 +1264,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
 </style>
 
 <!-- ▼ 返金保証プログラムについて -->
-<section id="refund" class="refund-guarantee">
+<section id="refund" class="refund-guarantee reveal">
   <!-- 小さなアイコン（このセクション専用） -->
   <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
     <!-- 手とコイン -->
@@ -1173,7 +1393,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
 <!-- ▲ ご利用者様の受給事例（見やすさ重視リデザイン版） -->
   
   <!-- 比較 -->
-  <section id="compare">
+  <section id="compare" class="reveal">
     <h2>ご自身で手続きする場合との比較</h2>
     <table class="comparison">
       <tr><th>項目</th><th>当サポート</th><th>ご自身</th></tr>
@@ -1186,7 +1406,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
   <!-- 流れ -->
-  <section id="flow">
+  <section id="flow" class="reveal">
     <h2>ご利用の流れ</h2>
     <div class="flow-steps">
       <div class="flow-step"><strong>STEP 1</strong><p>LINEで無料相談</p></div>
@@ -1196,7 +1416,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
   <!-- 利用者の声 -->
-  <section id="voices">
+  <section id="voices" class="reveal">
     <h2>利用者の声</h2>
     <div class="voice">「手続きがスムーズにできて本当に助かりました！」（30代 女性）</div>
     <div class="voice">「親身にサポートしていただき、不安が軽くなりました。」（40代 男性）</div>
@@ -1204,7 +1424,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
   </section>
 
   <!-- 症状チェック -->
-  <section id="symptoms" class="symptoms-band">
+  <section id="symptoms" class="symptoms-band reveal">
     <h2>日常でこういった症状に当てはまりませんか？</h2>
     <p class="symptoms-note">※ これはセルフチェックの目安です。実際の診断は医師の専門的判断によります。</p>
     <div class="check-grid" aria-hidden="true">
@@ -1233,7 +1453,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
 
 <!-- ▼ 受診・相談のご案内（症状セクション直下に追加） -->
 <!-- ▼ 受診・相談のご案内（症状セクション直下に追加｜強調版） -->
-<section class="mind-facts">
+<section class="mind-facts reveal">
   <h2 class="cap">現在うつ状態の人のうち、<span class="hl">約3人に1人は通院していません。</span></h2>
 
   <div class="facts-grid">
@@ -1405,7 +1625,7 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
 
 
   <!-- FAQ -->
-  <section id="faq">
+  <section id="faq" class="reveal">
     <h2>よくある質問</h2>
     <div class="faq-item">
       <div class="faq-question">どんな条件で延長できますか？</div>
@@ -1447,5 +1667,59 @@ footer{background:#fff;color:#4b5563;padding:2rem 1rem;text-align:center;border-
     secs.forEach(s=>io.observe(s));
   })();
 </script>
+
+<a class="float-cta" href="https://line.me/R/ti/p/@yourid" target="_blank" rel="noopener" aria-label="LINEで無料相談">✉️ LINEで相談</a>
+
+<script>
+addEventListener('scroll',()=>document.querySelector('.tocbar')
+  ?.classList.toggle('is-scrolled', scrollY>6));
+</script>
+
+
+<script>
+(() => {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el=>el.classList.add('is-in'));
+    return;
+  }
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  },{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+</script>
+
+
+<script>
+(function(){
+  const strip=document.querySelector('.limit-strip');
+  if(!strip) return;
+  // Spots
+  const spotsEl = strip.querySelector('.spots-left');
+  const spots = Number(strip.dataset.spots || '8');
+  if(spotsEl) spotsEl.textContent = spots;
+
+  // Deadline: end of this month 23:59:59 local time
+  function endOfMonth(d){
+    return new Date(d.getFullYear(), d.getMonth()+1, 0, 23,59,59);
+  }
+  const dd=strip.querySelector('.dd'), hh=strip.querySelector('.hh'), mm=strip.querySelector('.mm');
+  function tick(){
+    const now=new Date();
+    const end=endOfMonth(now);
+    const ms=end-now;
+    if(ms<=0){ dd.textContent='0'; hh.textContent='0'; mm.textContent='0'; return; }
+    const mins = Math.floor(ms/60000);
+    const days = Math.floor(mins/(60*24));
+    const hours = Math.floor((mins - days*24*60)/60);
+    const minsRem = mins % 60;
+    dd.textContent = days; hh.textContent = hours; mm.textContent = minsRem;
+  }
+  tick(); setInterval(tick, 60000);
+})();
+</script>
+
 </body>
 </html>
