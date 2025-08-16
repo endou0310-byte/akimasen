@@ -15,13 +15,13 @@
 <div class="tocwrap">
 <div class="brand"><span>あきません</span><span>失業保険延長サポート</span></div>
 <div class="tocnav">
-<a class="active" href="#support-details-v2">サポート内容</a>
-<a href="#kpi-v2">実績</a>
-<a href="#elig-v2">申請条件</a>
-<a href="#allowance">手当の流れ</a>
-<a href="#pricing">料金</a>
-<a href="#cases">事例</a>
+  <a class="active" href="#support-summary">サポート内容</a>
+  <a href="#elig-v2">申請条件</a>
+  <!-- 10・28ヶ月サポートのカードがあるセクション -->
+  <a href="#support">プラン</a>
+  <a href="#faq">よくある質問</a>
 </div>
+
 <div class="cta-group">
 <a class="btn line" href="https://line.me/R/ti/p/@yourid" target="_blank">LINEで相談</a>
 </div>
@@ -71,13 +71,17 @@
 
 <div class="container">
 <!-- ▼ サポート内容：一目で比較できるヒーローカード -->
-<section id="support-summary" class="sup-hero">
+<section id="support-summary" class="band band--white sup-hero">
+  <div class="container">  
   <h2 class="sup-eyebrow">サポート内容</h2>
-  <p class="sup-lead">
-    通常は3ヶ月しか受給できない失業手当を、社会保険を活用して<br class="sp">
-    <strong class="hl">最⼤28ヶ月間</strong>※延⻑するサポートをいたします。
-  </p>
-  <p class="sup-note">※45歳以上は最⼤30ヶ月</p>
+  <p class="sup-lead sup-lead--pop">
+  通常は3ヶ月しか受給できない失業手当を、社会保険（傷病手当）を活用して
+  <span class="lead28">最⼤28ヶ月 <em>延⻑</em></span>
+  するサポートをいたします。
+ </p>
+ <p class="sup-note"><span class="note-pill">※ 45歳以上は最⼤30ヶ月</span></p>
+
+
 
   <div class="sup-grid">
     <!-- 通常 -->
@@ -105,7 +109,6 @@
         <div class="months -green"><span class="num">最⼤18</span> ヶ月</div>
         <div class="sub">傷病手当受給</div>
       </div>
-
       <!-- 合計バッジ -->
       <div class="total-pill">合計 <strong>最⼤28ヶ月</strong></div>
     </article>
@@ -390,33 +393,38 @@
 </section>
 
 
-<section id="depress-stats-v2" class="section">
-  <div class="container">
-    <h2 class="section-title">
-      <span class="accent">現在うつ状態の人のうち、約3人に1人は通院していません。</span>
-    </h2>
+<section id="depress-stats-v2">
+  <div class="container stats-hero">
+    <div class="stats-copy">
+      <h2>現在うつ状態の人のうち、<mark>約3人に1人</mark>は通院していません。</h2>
+      <p class="lead">国内のうつ状態の人は<strong>約300万人</strong>、実際に通院している人（うつ病・気分障害）は<strong>約100万人</strong>といわれています。</p>
 
-    <p>
-      国内のうつ状態の人の人口は約<span class="strong">300万人</span>、<br>
-      うち実際に通院している人（うつ病・気分障害）は約<span class="strong">100万人</span>といわれています。
-    </p>
+      <div class="stats-chips">
+        <span class="chip">最近疲れやすい…</span>
+        <span class="chip">受診はハードルが高い</span>
+        <span class="chip">我慢すれば大丈夫かな？</span>
+      </div>
+    </div>
 
-    <div class="ref-box">
-      <strong>※参考データ</strong>
+    <div class="stats-fig">
+      <div class="donut" style="--p:33"><span>約3人に1人</span></div>
+      <small class="donut-caption">通院していない割合（概算）</small>
+    </div>
+  </div>
+
+  <!-- 参考データは折りたたみ -->
+  <details class="refbox">
+    <summary>参考データ</summary>
+    <div class="ref-contents">
       <ul>
         <li>厚生労働省「令和2年 国民生活基礎調査」などをベースに推計</li>
-        <li>生涯でうつ病を経験する人：約7％（およそ15人に1人）</li>
+        <li>生涯でうつ病を経験する人：約7%（およそ15人に1人）</li>
         <li>現在進行形でうつ状態にある人：約300万人前後</li>
         <li>実際に通院している人（うつ病・気分障害）：約100万人</li>
       </ul>
-      <p class="small">軽度のうつ状態や自己判断による「未受診者」も含めると、実際の未受診者数はさらに多いとする専門家もいます。特に若年層や男性は受診率が低い傾向があります。</p>
     </div>
-
-    <div class="speech-bubbles">
-      <div class="bubble">最近疲れやすい…</div>
-      <div class="bubble">受診はハードルが高い</div>
-      <div class="bubble">我慢すれば大丈夫かな？</div>
-    </div>
+  </details>
+</section>
 
     <!-- ▼ うつの受診状況：相談CTA（完全再現版） -->
 <section class="cta-line-wrap">
