@@ -722,3 +722,37 @@ details[open] summary:after{transform:translateY(-50%) rotate(45deg)}
   box-shadow:0 10px 25px rgba(27,127,197,.28);transition:transform .15s ease,box-shadow .15s ease
 }
 .support-cta:hover{transform:translateY(-1px);box-shadow:0 16px 35px rgba(27,127,197,.38)}
+
+
+/* --- 受給事例ヘッダーのモバイル修正 --- */
+@media (max-width: 640px){
+  /* タイトル行を1カラムにして上→中→右の順に縦積み */
+  .case-head{
+    grid-template-columns: 1fr !important;
+    gap: 8px 12px;
+    align-items: flex-start;
+  }
+  /* ピルが縦長にならないよう一行固定＋中央揃え */
+  .case-chip{
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;        /* ← 1文字ごとの改行を防止 */
+    padding: 8px 12px;
+    border-radius: 999px;
+    max-width: 100%;
+  }
+  /* 見出しは中央寄せ・少し控えめサイズ */
+  .case-label{
+    text-align: center;
+    font-size: clamp(1.0rem, 4.2vw, 1.25rem);
+    line-height: 1.25;
+  }
+  /* 合計額は右端に寄せる（必要なら center に） */
+  .case-total{ justify-self: end; }
+}
+
+/* --- 浮遊CTAが本文に被らないよう下余白を確保 --- */
+@media (max-width: 640px){
+  body{ padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .cta-float{ bottom: calc(16px + env(safe-area-inset-bottom)); }
+}
