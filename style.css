@@ -756,3 +756,60 @@ details[open] summary:after{transform:translateY(-50%) rotate(45deg)}
   body{ padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
   .cta-float{ bottom: calc(16px + env(safe-area-inset-bottom)); }
 }
+
+
+/* ===== 受給事例ヘッダーのモバイル修正 ===== */
+@media (max-width: 640px){
+
+  /* ヘッダー行は1カラムで縦積み（ピル→見出し→金額） */
+  .case-head,
+  .cases-head,
+  .benefit-case-head{
+    display: grid;
+    grid-template-columns: 1fr !important;
+    align-items: start;
+    gap: 8px 12px;
+  }
+
+  /* 縦書き/回転のピルを“横バッジ”へ強制 */
+  .case-chip,
+  .pill,
+  .badge-vert{
+    writing-mode: horizontal-tb !important;  /* ← 縦書きを解除 */
+    transform: none !important;               /* ← 回転を解除 */
+    white-space: nowrap;                      /* ← 1行に固定 */
+    word-break: keep-all;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    max-width: 100%;
+    margin: 0 auto 4px;                       /* 中央寄せ */
+  }
+
+  /* 見出しは中央寄せ＆少し小さめに */
+  .case-label,
+  .case-title{
+    text-align: center;
+    font-size: clamp(1rem, 4.4vw, 1.25rem);
+    line-height: 1.25;
+  }
+
+  /* 右側の“総受給額”等は中央に（好みで end に変更可） */
+  .case-total{ justify-self: center; }
+}
+
+/* ===== 浮遊CTAが本文に被らないスペーシング ===== */
+@media (max-width: 640px){
+  body{ padding-bottom: calc(96px + env(safe-area-inset-bottom)); } /* 画面下に余白 */
+  .cta-float{ bottom: calc(16px + env(safe-area-inset-bottom)); }
+  /* カード直下で被る時はカードにも余白追加（必要なら有効化）
+  .case-card{ padding-bottom: 96px; }
+  */
+}
+
+/* 画面幅がかなり狭い端末用のフォント縮小（任意） */
+@media (max-width: 360px){
+  .case-chip{ font-size: .85rem; }
+}
