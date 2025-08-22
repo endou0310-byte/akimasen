@@ -8,15 +8,15 @@
    CSS Variables & Base
 -------------------- */
 :root{
-  --ink:#0f172a;          /* 本文 */
-  --muted:#64748b;        /* サブ */
-  --bg:#f6f9ff;           /* 全体背景 */
-  --panel:#ffffff;        /* カード背景 */
-  --line:#e6eef5;         /* 罫線 */
-  --acc:#1b7fc5;          /* メインアクセント（青） */
-  --acc-2:#6c5ce7;        /* 補助アクセント（紫） */
-  --linegreen:#00c300;    /* LINE グリーン */
-  --accent-soft:#eaf4ff;  /* 芯をぼかした青 */
+  --ink:#0E162A;
+  --muted:#67809B;
+  --bg:#F4F8FF;
+  --panel:#FFFFFF;
+  --line:#E7EEF7;
+  --acc:#1C7FCA;
+  --acc-2:#6A60E6;
+  --linegreen:#06C755;
+  --accent-soft:#EAF2FF;
   --shadow:0 10px 22px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.04);
   --radius:16px;
 }
@@ -88,12 +88,10 @@ a{color:inherit;text-decoration:none}
    HERO
 -------------------- */
 .lp-hero{
-  position:relative;
   color:#fff;
   background:
-    radial-gradient(1000px 400px at 15% -20%, rgba(255,255,255,.25), rgba(255,255,255,0) 60%),
-    linear-gradient(120deg, #1b7fc5 0%, #5675e8 52%, #6c5ce7 100%);
-  overflow:hidden;
+    radial-gradient(1000px 400px at 18% -22%, rgba(255,255,255,.22), rgba(255,255,255,0) 60%),
+    linear-gradient(118deg, var(--acc) 0%, #4A78E6 52%, var(--acc-2) 100%);
 }
 .lp-hero::after{
   /* デコレーションの薄い円 */
@@ -399,3 +397,526 @@ a{color:inherit;text-decoration:none}
   color:var(--ink);
 }
 .lp-highlight strong{ font-weight:900; }
+
+
+
+/* =========================================
+   Warm Background Theme Override (FreeFree雰囲気寄せ)
+   使い方: 既存の style.css の末尾にコピペ
+   目的: 背景色彩を「青系」→「ベージュ／オレンジ系」へ
+   ========================================= */
+
+/* 1) 全体のベース色（紙のようなアイボリー） */
+:root{
+  --bg:#FFFDF9;        /* ページ地色 */
+  /* インクはほんの少しだけ茶寄りの濃色に（本文） */
+  --ink:#3B2E22;
+  --muted:#7A6E63;     /* 補足文の落ち着いたブラウン寄りグレー */
+  /* アクセントやLINEグリーンはそのままでもOK（ブランド踏襲） */
+  /* --acc, --acc-2, --linegreen は既存値を尊重 */
+}
+
+/* body 背景を暖色へ */
+body{ background: var(--bg); color: var(--ink); }
+
+/* 2) HERO（トップ）を“淡いオレンジ→白”の柔らかいグラデに */
+.lp-hero{
+  position:relative;    /* 擬似要素の基準 */
+  overflow:hidden;      /* はみ出し防止 */
+  color:#4A3728;        /* 見出し/本文は茶系で可読性UP */
+  background:
+    radial-gradient(1000px 420px at 22% -24%, rgba(255,255,255,.25), rgba(255,255,255,0) 60%),
+    linear-gradient(180deg, #FFF7EC 0%, #FFFFFF 100%);
+}
+
+/* 3) セクションの“空気感”を暖色で統一（交互の薄いグラデ） */
+.lp-awareness{ background: linear-gradient(180deg, #FFFDF9 0%, #FFFFFF 100%); }
+.lp-features{  background:#FFFFFF; } /* 特徴は白でコントラスト */
+.lp-voices-v2{ background: linear-gradient(180deg, #FFF8F1 0%, #FFFFFF 70%); }
+.lp-last{      background: linear-gradient(180deg, #FFF6EB 0%, #FFFFFF 100%); }
+
+/* 4) 補助UIの暖色化（任意。柔らかい印象のまま強調） */
+.lp-callout{   background: linear-gradient(180deg, #FFF9F0, #FFFFFF); }
+.lp-underline{ background: linear-gradient(transparent 60%, #FFE1A8 0); } /* 見出しの下線ハイライト */
+
+/* 5) 小さな可読性調整（任意） */
+.lp-hero-title{ text-shadow: 0 1px 1px rgba(255,255,255,.3); } /* ほんのり浮かせる */
+.lp-note, .lp-faq-a, .step-desc{ color: var(--muted); }       /* 補足文は落ち着いた色で */
+
+
+/* 横長バナーとして自然に見せる */
+.hero-cats{
+  position:relative;
+  margin:0 auto;
+  max-width:1200px;           /* サイト全体の幅に合わせる */
+  border-bottom:12px solid #F0E7D9; /* 猫が寄りかかる“縁”の表現 */
+  overflow:hidden;
+}
+.hero-cats img{
+  width:100%;
+  height:auto;
+  display:block;
+  aspect-ratio: 3 / 1;        /* 1200x400相当の横長感をキープ */
+  object-fit:cover;
+  object-position:center bottom;  /* 下端を優先 → 猫の寄りかかりを強調 */
+}
+
+/* 画面幅が広い時はさらに横長に */
+@media (min-width:1200px){
+  .hero-cats img{ aspect-ratio: 21 / 7; }
+}
+
+.hero-cats + *{ margin-top: 12px; }
+
+
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* ブラウザ全体の高さ */
+  background: url("nekkoshero.svg") no-repeat center center;
+  background-size: cover; /* 背景を拡大して画面いっぱいに */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.65); /* 半透明の白で読みやすく */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-content {
+  max-width: 900px;
+  color: #2a1a0a;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+.btn-line {
+  display: inline-block;
+  background: #00c300;
+  color: #fff;
+  font-weight: bold;
+  padding: 16px 32px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: background 0.3s ease;
+}
+
+.btn-line:hover {
+  background: #009900;
+}
+
+
+/* Hero */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;                 /* 画面一杯 */
+  display:flex; align-items:center; justify-content:center;
+  background-repeat:no-repeat;
+  background-position:center bottom; /* 下寄せ */
+  background-size:cover;
+}
+
+/* 画像パスはCSSの場所基準。img/配下ならコレ */
+.hero--cats{
+  background-image:url("img/nekkoshero.svg");
+}
+
+.hero-overlay{
+  width:100%; height:100%;
+  background:rgba(255,255,255,.35);  /* 0.35に薄める */
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:20px;
+}
+
+.hero-content{ max-width:900px; color:#2a1a0a }
+.hero h1{ font-size:3rem; font-weight:800; line-height:1.35; margin:0 0 1.2rem }
+.hero p{ font-size:1.2rem; margin:0 0 2rem }
+
+.btn-line{
+  display:inline-block; background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+}
+.btn-line:hover{ filter:brightness(1.05) }
+
+/* スマホ調整 */
+@media (max-width:600px){
+  .hero{ height:75vh }                 /* ちょい低め */
+  .hero h1{ font-size:2rem }
+  .hero p{ font-size:1rem }
+}
+
+
+/* ---- hero下端〜eligibilityまでを #ececec で統一 ---- */
+
+/* ヒーロー自体の下端カラーを #ececec に */
+.hero,
+.lp-hero { /* どちらでも使っている方に効きます */
+  background-color: #ececec; /* SVGの透過部や下端がこの色に馴染む */
+}
+
+/* オーバーレイは上だけ少し白を被せ、下に行くほど透明にして #ececec を活かす */
+.hero-overlay{
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.20) 55%,
+    rgba(255,255,255,0.00) 100%
+  );
+}
+
+/* ヒーロー直下の2セクションを #ececec に */
+#awareness,
+#eligibility{
+  background-color:#ececec;
+}
+
+/* （任意）境目のわずかな白スジ対策：最初の要素の上マージンを打ち消す */
+#awareness > *:first-child{ margin-top: 0; }
+#eligibility > *:first-child{ margin-top: 0; }
+
+
+/* ============ 1) 背景 #ececec を当てる範囲 ============ */
+/* 「ほとんどの方が申請できておりません」セクション */
+#awareness, .lp-awareness { background:#ececec; }
+
+/* 「あなたが社会保険の受給対象か、確認しませんか？」セクション */
+#eligibility { background:#ececec; }
+
+/* ヒーロー直下の地色も #ececec に揃える */
+.hero, .lp-hero { background-color:#ececec; }
+/* 既存の白っぽいオーバーレイを弱める/無効化（背景が透けて見えないように） */
+.hero-overlay { background: transparent; } /* 必要なら rgba(255,255,255,.15) など薄めでもOK */
+
+
+
+/* Hero */
+.hero{
+  position:relative;
+  width:100%;
+  height:100vh;                 /* 画面一杯 */
+  display:flex; align-items:center; justify-content:center;
+  background-repeat:no-repeat;
+  background-position:center bottom; /* 下寄せ */
+  background-size:cover;
+}
+
+/* 画像パスはCSSの場所基準。img/配下ならコレ */
+.hero--cats{
+  background-image:url("img/nekkoshero.svg");
+}
+
+.hero-overlay{
+  width:100%; height:100%;
+  background:rgba(255,255,255,.35);  /* 0.35に薄める */
+  display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:20px;
+}
+
+.hero-content{ max-width:900px; color:#2a1a0a }
+.hero h1{ font-size:3rem; font-weight:800; line-height:1.35; margin:0 0 1.2rem }
+.hero p{ font-size:1.2rem; margin:0 0 2rem }
+
+.btn-line{
+  display:inline-block; background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+}
+.btn-line:hover{ filter:brightness(1.05) }
+
+/* スマホ調整 */
+@media (max-width:600px){
+  .hero{ height:75vh }                 /* ちょい低め */
+  .hero h1{ font-size:2rem }
+  .hero p{ font-size:1rem }
+}
+
+
+
+/* === ヒーロー：SVGを全面、テキストを上に重ねる === */
+.hero.hero--cats{
+  position: relative;
+  min-height: 92vh;                 /* 画面ほぼ全面に */
+  background: #ececec url("img/nekkoshero.svg") no-repeat center bottom;
+  background-size: cover;           /* 全面にフィット（縦横比保持） */
+  overflow: hidden;
+}
+
+/* オーバーレイは透明（薄くしたくないため） */
+.hero-overlay{ background: transparent !important; }
+
+/* テキストを“上にかぶせる”：中央寄せ。猫にかぶりにくいよう少し上げる */
+.hero-content{
+  position: absolute; inset: 0;     /* セクション全面をテキスト領域に */
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: 24px;
+  transform: translateY(-6vh);      /* 文字を気持ち上へ（猫の安全域を作る） */
+  z-index: 2;
+}
+
+/* 見出し・リード・ボタンの間隔はここで調整 */
+.hero-content h1{ margin: 0 0 18px; line-height: 1.25; }
+.hero-content p { margin: 0 0 28px; line-height: 1.7; }
+
+/* ボタン：下に余白を足して猫にかぶりにくく */
+.btn-line{
+  display:inline-block;
+  background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+  margin-bottom: min(10vh, 120px);  /* 画面下に“安全域” */
+  position: relative; z-index: 3;
+}
+
+/* スマホ微調整（テキストをもう少し上へ） */
+@media (max-width: 768px){
+  .hero.hero--cats{ min-height: 88vh; }
+  .hero-content{ transform: translateY(-10vh); padding: 16px; }
+  .hero-content h1{ font-size: clamp(22px, 6vw, 32px); }
+  .hero-content p { font-size: clamp(14px, 3.6vw, 16px); }
+}
+
+/* 全ページで横スクロールが出ないよう保険（任意） */
+html, body { overflow-x: hidden; }
+
+/* --- ヒーローの横位置を微調整できる変数を用意 --- */
+:root { --hero-x: 0px; } /* 右に寄って見えるなら負の値、左に寄るなら正の値 */
+
+/* 背景方式で表示している場合 */
+.hero.hero--cats{
+  background:
+    #ececec
+    url("img/nekkoshero.svg")
+    no-repeat
+    calc(50% + var(--hero-x)) bottom / cover;
+}
+
+/* <img class="hero-art"> で重ねている方式ならこちら（どちらか一方だけ使う） */
+.hero-art{
+  left: 50%;
+  transform: translateX(calc(-50% + var(--hero-x)));
+}
+
+
+/* ===== Hero Final (rebuild) ===================================== */
+/* 横スクロール保険 */
+html, body { overflow-x: hidden; }
+
+/* 視覚中心の微調整ノブ：右へ寄って見えるときは負の値に */
+:root { --hero-x: 0px; }  /* 例: -48px / +24px などで調整 */
+
+/* ヒーロー本体：SVG全面＋テキスト重ね */
+.hero.hero--cats{
+  position: relative;
+  min-height: 92vh;
+  /* SVG を画面いっぱい。水平方向は --hero-x で微調整 */
+  background:
+    #ececec
+    url("img/nekkoshero.svg")
+    no-repeat
+    calc(50% + var(--hero-x)) bottom / cover;
+  overflow: hidden;
+}
+
+/* オーバーレイは完全透明（薄くならないように） */
+.hero-overlay{
+  position: static;
+  width: 100%; height: 100%;
+  background: transparent !important;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+}
+
+/* テキストを中央に重ね、猫に被らないよう少し上げる */
+.hero-content{
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px;
+  transform: translateY(-6vh);
+  z-index: 2;
+  color: #2a1a0a;
+}
+.hero-content h1{ margin: 0 0 18px; line-height: 1.25; }
+.hero-content p { margin: 0 0 28px; line-height: 1.7; }
+
+/* ボタン：下に安全域を確保（猫にかぶらない） */
+.btn-line{
+  display:inline-block; background:#06C755; color:#fff; font-weight:800;
+  padding:16px 32px; border-radius:999px; text-decoration:none;
+  box-shadow:0 6px 18px rgba(6,199,85,.25);
+  margin-bottom: min(10vh, 120px);
+  position: relative; z-index: 3;
+}
+.btn-line:hover{ filter:brightness(1.05) }
+
+/* ヒーロー直下〜eligibility までを #ececec に統一 */
+#awareness, #eligibility { background-color:#ececec; }
+
+/* レスポンシブ微調整 */
+@media (max-width: 768px){
+  .hero.hero--cats{ min-height: 88vh; }
+  .hero-content{ transform: translateY(-10vh); padding: 16px; }
+  .hero-content h1{ font-size: clamp(22px, 6vw, 32px); }
+  .hero-content p { font-size: clamp(14px, 3.6vw, 16px); }
+}
+
+/* ===== /Hero Final ================================================= */
+
+
+.hero {
+  text-align: center;   /* ← これで中央寄せ */
+}
+
+.hero h1, 
+.hero p {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;   /* 念押し */
+  max-width: 800px;     /* 行の横幅を制限すると読みやすい */
+}
+
+
+/***** RESET: 余計な背景/擬似要素/ブレンドを無効化 *****/
+.hero,
+.hero * {
+  box-sizing: border-box;
+}
+.hero,
+.hero::before,
+.hero::after,
+.hero-overlay,
+.hero-overlay::before,
+.hero-overlay::after {
+  background: transparent !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+  /* 擬似要素が白パネルを描いていた場合の保険 */
+  content: normal !important;
+}
+
+/***** レイアウトを “IMG重ね方式” に統一（background画像は使わない） *****/
+.hero.hero--cats{
+  position: relative;
+  min-height: 92vh;
+  background-color: #ececec !important;      /* 地色だけ */
+  overflow: hidden;
+}
+
+/***** テキストを確実に中央へ *****/
+.hero-content{
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, calc(-50% - 6vh)); /* ちょい上げ */
+  width: min(92vw, 1100px);                      /* 行幅を制限して中央 */
+  text-align: center;
+  z-index: 2;
+}
+.hero-content h1{ margin: 0 0 18px; line-height: 1.25; }
+.hero-content p { margin: 0 0 28px; line-height: 1.7; }
+
+/***** ボタン *****/
+.btn-line{
+  display:inline-block;
+  padding:16px 32px;
+  background:#06C755; color:#fff; font-weight:800; text-decoration:none;
+  border-radius:999px; box-shadow:0 6px 18px rgba(6,199,85,.25);
+  position: relative; z-index: 3;
+  margin-bottom: min(10vh, 120px); /* 猫にかぶらない安全域 */
+}
+
+/***** 猫SVG（横ズレ調整ノブを用意） *****/
+:root { --hero-x: 0px; }  /* 右に寄って見えるなら正、左なら負に */
+
+.hero-art{
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(calc(-50% + var(--hero-x)));
+  width: min(1200px, 92vw); height: auto;
+  max-width: none;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/***** モバイル微調整 *****/
+@media (max-width: 768px){
+  .hero.hero--cats{ min-height: 88vh; }
+  .hero-content{ transform: translate(-50%, calc(-50% - 10vh)); width: min(94vw, 760px); }
+  :root { --hero-x: 0px; }
+}
+
+
+/* ==== 猫SVGを前のサイズ感に：幅=画面いっぱい、スケール可 ==== */
+
+/* つまみ：水平方向の補正＆拡大率 */
+:root{
+  --hero-x: 0px;       /* 右に寄って見えたら正、左なら負 */
+  --hero-scale: 1.18;  /* 大きさ（1.0=等倍、1.18=18%拡大） */
+}
+
+/* セクション地色と安全域（猫に被らない） */
+.hero.hero--cats{
+  background: #ececec !important;
+  min-height: 92vh;
+  padding-bottom: clamp(240px, 26vh, 340px); /* 猫の高さぶん余白を確保 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 文字は中央固定のまま */
+.hero-content{
+  position: absolute; inset: 0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:24px;
+  transform: translate(-50%, calc(-50% - 6vh));
+  left:50%; top:50%; z-index:2;
+}
+
+/* 猫SVG：画面幅100% + スケールで以前の“迫力”に戻す */
+.hero-art{
+  position:absolute; bottom:0; left:50%;
+  width:100vw;              /* 画面いっぱい */
+  max-width:none; height:auto;
+  transform-origin: bottom center;  /* 下基準で拡大縮小 */
+  transform: translateX(calc(-50% + var(--hero-x))) scale(var(--hero-scale));
+  z-index:1; pointer-events:none;
+}
+
+/* スマホは少しだけ縮める＆補正弱める */
+@media (max-width:768px){
+  :root{
+    --hero-x: 0px;
+    --hero-scale: 1.06;
+  }
+  .hero.hero--cats{ min-height: 88vh; padding-bottom: clamp(200px, 24vh, 300px); }
+  .hero-content{ transform: translate(-50%, calc(-50% - 10vh)); padding:16px; }
+}
