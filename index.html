@@ -20,7 +20,14 @@
       <a href="https://line.me" class="btn-line">LINEで無料相談</a>
     </div>
   </div>
-  <img src="img/nekkoshero.svg" alt="" class="hero-art" aria-hidden="true">
+
+  <!-- PC/SPで画像を切り替え -->
+  <picture>
+    <!-- スマホ用 -->
+    <source media="(max-width: 768px)" srcset="img/nekkosheroSP.svg">
+    <!-- PC用 -->
+    <img src="img/nekkoshero.svg" alt="ヒーロー画像" class="hero-art">
+  </picture>
 </section>
 
 
