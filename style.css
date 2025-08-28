@@ -920,3 +920,26 @@ html, body { overflow-x: hidden; }
   .hero.hero--cats{ min-height: 88vh; padding-bottom: clamp(200px, 24vh, 300px); }
   .hero-content{ transform: translate(-50%, calc(-50% - 10vh)); padding:16px; }
 }
+
+
+/* ==== HeroのLINEボタン：位置微調整ノブ ==== */
+/* 上に上げたいときは負の値（例: -32px）、下げたいときは正の値（例: 24px） */
+:root{
+  --cta-shift-y: 170px;                 /* デフォルトは移動なし */
+  --cta-bottom-safe: min(10vh,80px); /* 猫に被らない“安全域”。小さくすると下がる */
+}
+
+/* ヒーローのLINEボタンに適用（最後に置くことで既存定義を上書き） */
+.hero-content .btn-line{
+  margin-bottom: var(--cta-bottom-safe);
+  /* CSS Transform を使わずレイアウトに影響しにくい translate を採用 */
+  translate: 0 var(--cta-shift-y);
+}
+
+/* 端末別に違う位置にしたい場合（例） */
+@media (max-width: 768px){
+  :root{
+    --cta-shift-y: -12px;     /* スマホでは少し上へ */
+    --cta-bottom-safe: 14vh;  /* 安全域を少し広げる（下げたい時は小さく） */
+  }
+}
