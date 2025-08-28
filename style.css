@@ -925,7 +925,7 @@ html, body { overflow-x: hidden; }
 /* ==== HeroのLINEボタン：位置微調整ノブ ==== */
 /* 上に上げたいときは負の値（例: -32px）、下げたいときは正の値（例: 24px） */
 :root{
-  --cta-shift-y: 170px;                 /* デフォルトは移動なし */
+  --cta-shift-y: 180px;                 /* デフォルトは移動なし */
   --cta-bottom-safe: min(10vh,80px); /* 猫に被らない“安全域”。小さくすると下がる */
 }
 
@@ -941,5 +941,108 @@ html, body { overflow-x: hidden; }
   :root{
     --cta-shift-y: -12px;     /* スマホでは少し上へ */
     --cta-bottom-safe: 14vh;  /* 安全域を少し広げる（下げたい時は小さく） */
+  }
+}
+
+
+
+
+
+.nayami {
+  padding: 60px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  margin-bottom: 32px;
+}
+
+.nayami-list {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.nayami-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+.nayami-card img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.nayami-card h3 {
+  font-size: 1rem;
+  margin: 8px 0 4px;
+  font-weight: bold;
+}
+
+.nayami-card p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 992px) {
+  .nayami-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .nayami-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* 共通：水彩マーカー風（背景ににじみ感） */
+.marker-udl{
+  position: relative;
+  display: inline;
+  /* 文字と干渉しない程度に薄く */
+  background: linear-gradient(
+    transparent 58%,
+    rgba(236, 71, 65, 0.877) 0 86%,
+    transparent 0
+  );
+  border-radius: .18em;     /* 角を少し丸く */
+  padding: 0 .06em;         /* 行の折返しで切れにくく */
+}
+
+/* 太めにしたい箇所用（見出しなど） */
+.marker-udl--thick{
+  background: linear-gradient(
+    transparent 52%,
+    rgba(246,167,198,.42) 0 92%,
+    transparent 0
+  );
+}
+
+/* カラーバリエーション（必要に応じて付け替え） */
+.marker-udl--pink   { background: linear-gradient(transparent 58%, rgba(246,167,198,.38) 0 86%, transparent 0); }
+.marker-udl--mint   { background: linear-gradient(transparent 58%, rgba(165,232,210,.38) 0 86%, transparent 0); }
+.marker-udl--yellow { background: linear-gradient(transparent 58%, rgba(255,231,138,.42) 0 86%, transparent 0); }
+.marker-udl--blue   { background: linear-gradient(transparent 58%, rgba(164,198,255,.38) 0 86%, transparent 0); }
+
+/* SPでやや太く近づける（視認性アップ） */
+@media (max-width: 768px){
+  .marker-udl,
+  .marker-udl--thick{
+    background: linear-gradient(
+      transparent 54%,
+      rgba(246,167,198,.42) 0 92%,
+      transparent 0
+    );
   }
 }
