@@ -1046,3 +1046,366 @@ html, body { overflow-x: hidden; }
     );
   }
 }
+
+
+/* 色や高さを少し触るだけで雰囲気を変えられるように変数化 */
+:root{
+  --bridge-height: 100px;   /* 全体の高さ */
+  --paw-show: 1;            /* 0なら肉球を非表示 */
+}
+
+.bridge--subtle{
+  position: relative;
+  width: 100%;
+  line-height: 0;
+  overflow: hidden;
+}
+.bridge--subtle > svg{
+  display:block;
+  width:100%;
+  height: var(--bridge-height);
+}
+
+/* 肉球（右下に小さく） */
+.bridge--subtle .paw{
+  position:absolute;
+  right:18px;
+  bottom:8px;
+  transform: rotate(-12deg);
+  opacity: calc(var(--paw-show));
+  pointer-events:none;
+}
+
+/* モバイルは少しコンパクトに */
+@media (max-width: 768px){
+  :root{ --bridge-height: 80px; }
+  .bridge--subtle .paw{ right:12px; bottom:6px; width:38px; height:38px; }
+}
+
+
+
+
+/* =============== Parallax band =============== */
+.lp-parallax{
+  position: relative;
+  min-height: 70vh;              /* 高さは好みで */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;  /* デスクトップでパララックス */
+  isolation: isolate;
+}
+/* ふんわり白グラデで上下を馴染ませる */
+.lp-parallax::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(#fff 0%, transparent 20%, transparent 80%, #fff 100%);
+  pointer-events:none; z-index:-1;
+}
+/* 画像指定（WebP→PNGフォールバック） */
+.lp-parallax--bg1{
+  background-image: url("img/BG1.webp");
+}
+@supports not (background-image: url("img/x.webp")) {
+  .lp-parallax--bg1{ background-image: url("img/BG1.png"); }
+}
+/* iOS対策：モバイルでは固定をオフ（スクロール負荷軽減） */
+@media (max-width: 1024px), (prefers-reduced-motion: reduce){
+  .lp-parallax{ background-attachment: scroll; background-position:center; }
+}
+
+
+:root{
+  /* ヒーローの高さ（仮値）。後述のJSを入れると自動で実寸に更新されます */
+  --hero-height: 520px;
+  --hero-fade: 80px; /* 切替部の馴染ませ幅 */
+}
+
+/* 画面全体の背面に固定配置する背景レイヤー */
+.site-bg{
+  position: fixed;
+  inset: 0;
+  z-index: -1;                 /* ぜったい背面 */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed; /* デスクトップでパララックス風 */
+}
+
+/* 画像指定（WebP→PNGフォールバック） */
+.site-bg--BG1{ background-image: url("img/BG1.webp"); }
+@supports not (background-image: url("x.webp")) {
+  .site-bg--BG1{ background-image: url("img/BG1.png"); }
+}
+
+/* ヒーロー部分は白で覆って、直下から背景が見えるようにする */
+.site-bg::before{
+  content:"";
+  position:absolute; inset:0;
+  /* 上は白→ヒーローの直下で透明へフェード */
+  background:
+    linear-gradient(
+      #fff 0,
+      #fff var(--hero-height),
+      transparent calc(var(--hero-height) + var(--hero-fade)),
+      transparent 100%
+    );
+  pointer-events:none;
+}
+
+/* iOS等では固定をオフにして負荷軽減 */
+@media (max-width: 1024px), (prefers-reduced-motion: reduce){
+  .site-bg{ background-attachment: scroll; }
+}
+
+
+/* 画像はとりあえず PNG を直指定（確実に出す） */
+.site-bg--BG1{ background-image: url("img/BG1.png"); }
+
+/* 背景レイヤーが見えるように body を透明に */
+html, body{ background: transparent !important; }
+
+/* iOS等の負荷対策はそのまま */
+@media (max-width:1024px), (prefers-reduced-motion: reduce){
+  .site-bg{ background-attachment: scroll; }
+}
+
+.lp-band, .lp-section{ background: rgba(255,255,255,.92); } /* うっすら透過 */
+
+/* ---- 全体背景を見せるための上書き ---- */
+
+/* 1) ラッパーやセクションの塗りを透明化 */
+html, body, main, .main, .page, #top {
+  background: transparent !important;
+}
+section, .lp-band, .lp-section {
+  background-color: transparent !important;
+  background-image: none !important;     /* グラデや柄も消す */
+}
+section::before, section::after,
+.lp-band::before, .lp-band::after {
+  background: none !important;            /* 疑似要素での塗りを無効化 */
+}
+
+/* 2) 読みやすさのため、”中の箱”だけ白を維持 */
+.lp-card, .lp-panel, .lp-box, .lp-cta, .lp-pricing,
+.lp-voice-case, .lp-feature, .lp-white {
+  background: rgba(255,255,255,.96) !important;
+}
+
+/* 3) 背景レイヤーはPNG直指定（確実に表示） */
+.site-bg--BG1{ background-image: url("img/BG1.png"); }
+
+/* iOS負荷対策はそのまま */
+@media (max-width:1024px), (prefers-reduced-motion: reduce){
+  .site-bg{ background-attachment: scroll; }
+}
+
+.site-bg::before{ content:none !important; }   /* もしくは display:none; */
+
+/* —— 区切りデコ（白帯・肉球・波形など）を全消し —— */
+
+/* 実体要素ごと消す */
+hr, .hr,
+[class*="divider"],         /* .section-divider, .lp-divider, .paw-divider, .wave-divider… */
+[class*="separator"],       /* .section-separator, .band-separator… */
+[class*="shape-divider"],
+[class*="paw"]{
+  display:none !important;
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  height:0 !important;
+}
+
+/* 疑似要素で描いているパターンも殺す */
+section::before, section::after,
+.lp-band::before, .lp-band::after,
+.lp-section::before, .lp-section::after,
+[class*="divider"]::before, [class*="divider"]::after,
+[class*="separator"]::before, [class*="separator"]::after,
+[class*="shape-divider"]::before, [class*="shape-divider"]::after,
+[class*="paw"]::before, [class*="paw"]::after{
+  content:none !important;
+  display:none !important;
+  background:none !important;
+  border:0 !important;
+  box-shadow:none !important;
+  height:0 !important;
+}
+
+/* セクション本体に線や背景が付いている場合の保険 */
+section, .lp-band, .lp-section{
+  background: transparent !important;
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+}
+
+
+/* ====== 見出しを中央に ====== */
+/* 共通：タイトル系 */
+.lp-title,
+.section-title,
+.lp-section > h1, .lp-section > h2, .lp-section > h3,
+.lp-band    > h1, .lp-band    > h2, .lp-band    > h3{
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 指定のセクション（IDは想定。異なる場合は置き換えOK） */
+#conditions h2,            /* ほとんどの方が申請できておりません 等 */
+#cta h2,                   /* あなたが社会保険の受給対象か… */
+#flow h2,                  /* ご利用の流れ */
+#features h2,              /* サービスの特徴・サポート内容 */
+#voices h2,                /* ご利用者様の声 */
+#anonymous h2,             /* 匿名OK・相談無料 */
+#faq h2 {                  /* よくあるご質問 */
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* タイトル下のリード文も中央寄せに（あれば） */
+.lp-lead, .section-lead, .lead {
+  text-align: center !important;
+  margin-left: auto; margin-right: auto;
+}
+
+/* 下線/アクセントの疑似要素を中央に（使っている場合） */
+.lp-title::after,
+.section-title::after,
+.lp-section > h2::after,
+.lp-band    > h2::after{
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+
+/* ヒーロー全体を下端でフェードアウト */
+.lp-hero, .hero, #hero{
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+}
+/* フェード量を調整：82%→85〜90% など */
+
+
+/* ===== しずくエッジ（.hero hero--cats 専用・衝突回避込み） ===== */
+.hero{ position:relative; z-index:0; /* 背景より手前に */ }
+/* 過去の「section::after を消す」パッチを無効化するための上書き */
+.hero.hero--cats::after{ content:"" !important; display:block !important; }
+
+.hero.hero--cats::after{
+  /* 形状・配置 */
+  position:absolute; left:0; right:0; bottom:-1px; height:var(--drip-h,120px);
+  pointer-events:none; z-index:1;
+  /* 下に被せる色（必要なら透明度を下げて馴染ませる） */
+  --drip-rgb: 255,255,255;
+  background: rgba(var(--drip-rgb), var(--drip-alpha, .98));
+
+  /* しずく形状のマスク（WebKit/標準両対応） */
+  -webkit-mask:
+    radial-gradient(40px 22px at 8% 95%,  transparent 60%, #000 62%),
+    radial-gradient(26px 18px at 23% 100%, transparent 62%, #000 64%),
+    radial-gradient(34px 20px at 41% 94%, transparent 58%, #000 60%),
+    radial-gradient(28px 18px at 60% 100%, transparent 60%, #000 62%),
+    radial-gradient(32px 20px at 77% 96%, transparent 60%, #000 62%),
+    radial-gradient(38px 22px at 92% 98%, transparent 60%, #000 62%),
+    linear-gradient(#000,#000);
+          mask:
+    radial-gradient(40px 22px at 8% 95%,  transparent 60%, #000 62%),
+    radial-gradient(26px 18px at 23% 100%, transparent 62%, #000 64%),
+    radial-gradient(34px 20px at 41% 94%, transparent 58%, #000 60%),
+    radial-gradient(28px 18px at 60% 100%, transparent 60%, #000 62%),
+    radial-gradient(32px 20px at 77% 96%, transparent 60%, #000 62%),
+    radial-gradient(38px 22px at 92% 98%, transparent 60%, #000 62%),
+    linear-gradient(#000,#000);
+
+  /* 軽い影で自然に */
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,.06));
+}
+
+/* ヒーローが切ってしまう場合の保険（必要なときだけ有効化）
+.hero{ overflow:visible !important; }
+*/
+
+/* モバイルは少し控えめに */
+@media (max-width: 768px){
+  .hero.hero--cats::after{ height: calc(var(--drip-h,120px) * .75); }
+}
+
+/* マスク非対応環境のフォールバック：ゆるいフェードに */
+@supports not (mask: linear-gradient(#000,#000)){
+  .hero.hero--cats::after{
+    -webkit-mask:none; mask:none;
+    background: linear-gradient(to bottom,
+      rgba(var(--drip-rgb), .98) 0%,
+      rgba(var(--drip-rgb), .92) 60%,
+      rgba(var(--drip-rgb), 0) 100%);
+  }
+}
+
+
+/* 猫は最前面のまま */
+.hero.hero--cats{ position:relative; z-index:100; }
+
+/* 雲ベール：赤ライン位置に合わせて被せる */
+.cloud-veil{
+  --h:180px;         /* 雲の帯の厚み */
+  --overlap:-68px;   /* ヒーローへ被せる量 ← ここを微調整（例:-60～-90px） */
+
+  position:relative;
+  z-index:40;                 /* ヒーロー(100)より下、次セクションより上 */
+  height:var(--h);
+  margin-top:var(--overlap);
+  pointer-events:none;
+
+  /* 雲（上側が最も濃く、下に行くほど薄く消える） */
+  --c:255,255,255;            /* 雲色（白） */
+  background:
+    radial-gradient(160px 70px  at  6% 22%,  rgba(var(--c),.96) 35%, rgba(var(--c),.76) 60%, transparent 70%),
+    radial-gradient(240px 90px  at 22% 20%,  rgba(var(--c),.95) 32%, rgba(var(--c),.74) 60%, transparent 72%),
+    radial-gradient(200px 80px  at 40% 26%,  rgba(var(--c),.95) 34%, rgba(var(--c),.74) 60%, transparent 72%),
+    radial-gradient(220px 90px  at 60% 18%,  rgba(var(--c),.96) 32%, rgba(var(--c),.75) 60%, transparent 72%),
+    radial-gradient(200px 85px  at 78% 24%,  rgba(var(--c),.95) 34%, rgba(var(--c),.74) 60%, transparent 72%),
+    radial-gradient(170px 70px  at 94% 20%,  rgba(var(--c),.94) 35%, rgba(var(--c),.72) 60%, transparent 70%);
+  filter: blur(6px) saturate(103%);
+  /* 下方向にフェードアウト（上はしっかり、下は透明） */
+  -webkit-mask-image: linear-gradient(to bottom, #000 35%, rgba(0,0,0,.55) 70%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 35%, rgba(0,0,0,.55) 70%, transparent 100%);
+}
+
+/* 次セクションが覆わないための安全網 */
+section, .lp-band, .lp-section{ position:relative; z-index:10; }
+
+/* モバイルは控えめに */
+@media (max-width:768px){
+  .cloud-veil{ --h:-300px; --overlap:-50px; filter: blur(40px); }
+}
+
+
+/* === LINEボタンの文言を“完全に中央”に見せる補正 === */
+/* 左の ::before と同じ幅のダミーを右側に作ってバランスを取る */
+.lp-btn-line::after{
+  content:"";
+  width:18px;              /* 左アイコンと同じ幅 */
+  height:18px;
+  display:inline-block;    /* .lp-btn の inline-flex に参加させる */
+}
+/* 念のため中央寄せを明示（既に .lp-btn で指定済みだが保険） */
+.lp-btn.lp-btn-line{ justify-content:center; }
+
+/* ===== CTAテキストの中央寄せ ===== */
+.lp-cta-panel{ text-align:center; } /* ブロック全体を中央寄せ */
+
+.lp-cta-panel .lp-cta-h,
+.lp-cta-panel .lp-cta-p,
+.lp-cta-panel .lp-cta-note{
+  text-align:center;       /* 念のため個別にも指定 */
+  margin-left:auto;
+  margin-right:auto;
+}
