@@ -7,30 +7,34 @@
 <title>あきません｜失業保険延長サポート（無料相談・オンライン完結）</title>
 <meta content="失業保険の受給期間を最大限活用するためのサポート。専門スタッフが無料で相談に対応。全国対応・オンライン完結。" name="description"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&amp;family=Rounded+Mplus+1c:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="style.css" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"/><link as_="image" href="img/TOP1.png" rel="preload"/></head>
+<link href="style.css" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="anonymous" href="https://fonts.gstatic.com" rel="preconnect"/><link as_="image" href="img/TOP1.png" rel="preload"/>
+<link rel="preload" as="image" href="img/niku.png" imagesizes="64px"/>
+</head>
 <body>
 
-  
-
-<section class="hero hero--cats">
-  <div class="hero-overlay">
-    <div class="hero-content">
-      <h1>退職後の生活を安心に。<br>受給期間を <span class="marker-udl">最大２８ヶ月</span> まで延長できます</h1>
-      <p>専門スタッフがあなたの状況に合わせて制度活用をサポート。<br>まずはLINEでご相談ください。</p>
-      <a href="https://line.me" class="btn-line">LINEで無料相談</a>
-    </div>
-  </div>
-
-  <!-- PC/SPで画像を切り替え -->
-  <picture>
-    <!-- スマホ用 -->
-    <source media="(max-width: 768px)" srcset="img/nekkosheroSP.svg">
-    <!-- PC用 -->
-    <img src="img/nekkoshero.svg" alt="ヒーロー画像" class="hero-art">
+<section id="top" class="hero-cover is-intro">
+  <!-- 背景（下端優先で全面表示） -->
+  <picture class="hero-media" aria-hidden="true">
+    <source media="(max-width:768px)" srcset="img/nekkosheroSP.svg">
+    <img src="img/nekkoshero.svg" alt="">
   </picture>
-  </section>
-</section><!-- .hero hero--cats -->
-<div class="cloud-veil" aria-hidden="true"></div>
+
+  <!-- 中央ブロック：見出し → 説明文 → ボタン → 画像（この順で縦並び） -->
+  <div class="hero-ui">
+    <h1>退職後の生活を安心に。<br>受給期間を <mark>最⼤28ヶ月</mark> まで延長できます</h1>
+
+    <p class="lead">専門スタッフがあなたの状況に合わせて制度活用をサポート。<br>まずはLINEでご相談ください。</p>
+    
+      <!-- ↓ この画像が「説明文の下」に表示されます（透過SVG推奨） -->
+    <picture class="hero-badges">
+      <source media="(max-width:768px)" srcset="img/nekkosheroSP_art.svg">
+      <img src="img/nekkoshero_art.svg" alt="">
+    </picture>
+  </div>
+</section>
+
+
+
 
 
 
@@ -442,44 +446,112 @@
   </div>
 </section>
 
+<!-- ▼肉球ボタン（このブロックを <script> の上に移動） -->
+<a href="#top" class="paw-top" aria-label="トップへ戻る">
+  <img src="img/niku.png" alt="" width="84" height="84" decoding="async">
+</a>
+
+
 <script>
-(function(){
-  const chips = document.querySelectorAll('.lp-chip');
-  const list  = document.getElementById('voiceList');
-  const cases = Array.from(list.querySelectorAll('.lp-voice-case'));
-  const more  = document.getElementById('voicesMore');
+document.addEventListener('DOMContentLoaded', () => {
+  /* ========== ご利用者様の声：絞り込み + もっと見る ========== */
+  (function(){
+    const list  = document.querySelector('#voices .lp-voice-list') || document.getElementById('voiceList');
+    if (!list) return; // セクションが無いページは何もしない
 
-  let filter = 'all';
-  let visible = 6; // 初期表示は6件
+    const cases = Array.from(list.querySelectorAll('.lp-voice-case'));
+    const more  = document.getElementById('voicesMore');
+    const chips = document.querySelectorAll('.lp-chip');
 
-  function apply(){
-    const matched = cases.filter(c => {
-      if(filter==='all') return true;
-      return c.classList.contains(filter);
-    });
-    // 全部隠してから matched の先頭 visible 件だけ表示
-    cases.forEach(c => c.style.display='none');
-    matched.slice(0, visible).forEach(c => c.style.display='block');
-    more.style.display = matched.length > visible ? 'inline-flex' : 'none';
-  }
+    let filter = 'all', visible = 6;
 
-  // 初期
-  apply();
+    const apply = () => {
+      const matched = cases.filter(c => filter === 'all' || c.classList.contains(filter));
+      cases.forEach(c => c.style.display = 'none');
+      matched.slice(0, visible).forEach(c => c.style.display = 'block');
+      if (more) more.style.display = matched.length > visible ? 'inline-flex' : 'none';
+    };
 
-  // 絞り込み
-  chips.forEach(btn => btn.addEventListener('click', () => {
-    chips.forEach(c => c.classList.remove('is-active'));
-    btn.classList.add('is-active');
-    filter = btn.dataset.filter;
-    visible = 6;
     apply();
-  }));
+    chips.forEach(btn => btn.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      filter = btn.dataset.filter || 'all';
+      visible = 6;
+      apply();
+    }));
+    if (more) more.addEventListener('click', () => { visible += 5; apply(); });
+  })();
 
-  // もっと見る
-  more.addEventListener('click', () => { visible += 5; apply(); });
-})();
+  /* ========== ヒーロー：ロード直後は全画面 → 少しスクロールしたら通常に戻す ========== */
+  (function(){
+    const hero = document.querySelector('#top.hero-cover');
+    if (!hero) return;
+
+    if (!hero.classList.contains('is-intro')) hero.classList.add('is-intro');
+
+    const offIntro = () => {
+      hero.classList.remove('is-intro');       // 高さはCSSの clamp(...) に復帰
+      window.removeEventListener('scroll', onScroll);
+    };
+    const onScroll = () => { if (window.scrollY > 2) offIntro(); };
+
+    if (window.scrollY > 2) offIntro();
+    else window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  /* ========== 肉球：右下表示 + クリックで常に Y=0（ページ最上部）へ戻す ========== */
+  (function(){
+    const btn = document.querySelector('.paw-top');
+    if (!btn) return;
+
+    const sticky  = document.querySelector('.lp-sticky-cta'); // 下部固定CTAがあれば回避
+    const SHOW_AT = 240;
+
+    const reposition = () => {
+      let extra = 0;
+      if (sticky && getComputedStyle(sticky).display !== 'none') {
+        extra = sticky.getBoundingClientRect().height + 12;
+      }
+      btn.style.setProperty('--bottom-extra', `${extra}px`);
+    };
+
+    const onScroll = () => {
+      if (window.scrollY > SHOW_AT) btn.classList.add('is-show');
+      else btn.classList.remove('is-show');
+      reposition();
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const html = document.documentElement;
+      const body = document.body;
+
+      // 介入対策：戻り中は CSS の smooth と overflow-anchor を無効化
+      html.classList.add('scrolling-to-top');
+      body.classList.add('scrolling-to-top');
+
+      // ヒーローの高さ変動を先に止める（is-intro を確実に解除）
+      const hero = document.querySelector('#top.hero-cover');
+      if (hero) hero.classList.remove('is-intro');
+
+      // 常にページ最上部へ（要素参照はしない）
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      // レイアウト再計算後に “0px を再指定” して確定（押し戻し対策）
+      setTimeout(() => window.scrollTo({ top: 0, behavior: 'auto' }), reduce ? 0 : 450);
+
+      const cleanup = () => { html.classList.remove('scrolling-to-top'); body.classList.remove('scrolling-to-top'); };
+      const onEnd = () => { if (window.scrollY <= 0) { cleanup(); window.removeEventListener('scroll', onEnd); } };
+      window.addEventListener('scroll', onEnd, { passive: true });
+      setTimeout(cleanup, reduce ? 0 : 1200); // 念のため
+    });
+  })();
+});
 </script>
-
 
 </body>
 </html>

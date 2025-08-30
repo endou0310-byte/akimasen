@@ -1210,7 +1210,7 @@ hr, .hr,
 [class*="divider"],         /* .section-divider, .lp-divider, .paw-divider, .wave-divider… */
 [class*="separator"],       /* .section-separator, .band-separator… */
 [class*="shape-divider"],
-[class*="paw"]{
+[class*="paw"]:not(.paw-top){
   display:none !important;
   background:none !important;
   border:0 !important;
@@ -1225,7 +1225,8 @@ section::before, section::after,
 [class*="divider"]::before, [class*="divider"]::after,
 [class*="separator"]::before, [class*="separator"]::after,
 [class*="shape-divider"]::before, [class*="shape-divider"]::after,
-[class*="paw"]::before, [class*="paw"]::after{
+[class*="paw"]:not(.paw-top)::before,
+[class*="paw"]:not(.paw-top)::after{
   content:none !important;
   display:none !important;
   background:none !important;
@@ -1409,3 +1410,504 @@ section, .lp-band, .lp-section{ position:relative; z-index:10; }
   margin-left:auto;
   margin-right:auto;
 }
+
+
+/* ===== Letterbox OK：画面フィット型ヒーロー ===== */
+:root{
+  --min-h: 560px;                          /* 最低高さ */
+  --safe-bottom: clamp(56px, 9vh, 120px);  /* ボタンと下端の距離 */
+  --focus: 50% 45%;                        /* 画像の重心（必要なら調整） */
+  --letterbox: #f3f4f6;                    /* 余白(レタボ)の色 */
+}
+
+.hero-fit{
+  position: relative;
+  height: 100svh;                          /* モバイルURLバー対応 */
+  min-height: var(--min-h);
+  background: var(--letterbox);            /* 余白の色 */
+  overflow: hidden;
+}
+@supports not (height: 100svh){
+  .hero-fit{ height: 100vh; }              /* 古い環境フォールバック */
+}
+
+/* 主役画像：常に全体表示（切れない）→余白は出る */
+.hero-fit .hero-canvas{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;                      /* ←肝：画面にフィット */
+  object-position: var(--focus);
+}
+
+/* テキストは常に中央。下に安全域を確保 */
+.hero-fit .hero-ui{
+  position: absolute; inset: 0; z-index: 2;
+  display: grid; place-content: center;
+  text-align: center;
+  padding: clamp(16px, 4vw, 40px);
+}
+.hero-fit .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px); line-height: 1.2; margin: 0 0 .6em;
+}
+.hero-fit .hero-ui p{
+  font-size: clamp(14px, 2.8vw, 18px); color:#4b5563; margin: 0 0 1.2em;
+}
+.hero-fit .btn-line{
+  display:inline-block; margin-bottom: var(--safe-bottom);
+}
+
+
+/* ==== Full-bleed Hero RESET for #top ==== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --focus: 50% 45%;                      /* 見せたい重心（必要なら調整） */
+  --safe-bottom: clamp(48px, 8vh, 96px); /* ボタンの下余白 */
+}
+
+/* コンテナ：高さ確保＋余計なレイヤーの干渉を遮断 */
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background-image: none !important;
+}
+@supports not (height: 1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* #top内は “主役画像” と “中央UI” 以外は見せない（重複排除） */
+#top.hero-cover > :not(.hero-media):not(.hero-ui){ display:none !important; }
+#top.hero-cover::before,
+#top.hero-cover::after{ content: none !important; }  /* 擬似要素の雲などを無効化 */
+
+/* 主役画像：余白ゼロで全面表示（必要ならトリミング） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%; display:block;
+  object-fit: cover;                      /* ★隙間を出さない */
+  object-position: var(--focus);
+  pointer-events:none;
+}
+
+/* 中央UI */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-content:center; text-align:center;
+  padding: clamp(16px, 4vw, 40px);
+}
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px); line-height:1.2; margin:0 0 .6em;
+}
+#top.hero-cover .hero-ui p{
+  font-size: clamp(14px, 2.6vw, 18px); color:#4b5563; margin:0 0 1.2em;
+}
+
+/* LINEボタン：巨大化防止 */
+#top.hero-cover .btn-line{
+  display:inline-block; white-space:nowrap;
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(10px, 1.1vw, 14px) clamp(18px, 2vw, 26px);
+  border-radius: 9999px; line-height:1;
+  width:auto; max-width: 360px;
+  margin-bottom: var(--safe-bottom);
+}
+
+
+/* ==== Full-bleed Hero / bottom-anchored（下端は切らない） ==== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --focus: 50% 100%;                    /* ★下端固定（bottom center） */
+  --safe-bottom: clamp(80px, 12vh, 180px); /* ★猫の上を空ける安全域 */
+}
+
+/* コンテナ高さ＋重複レイヤーの無効化（以前と同じ） */
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background-image: none !important;
+}
+#top.hero-cover::before,
+#top.hero-cover::after{ content: none !important; }
+#top.hero-cover > :not(.hero-media):not(.hero-ui){ display:none !important; }
+@supports not (height: 1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* 主役画像：全面表示しつつ “常に下端を見せる” */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width: 100%; height: 100%; display: block;
+  object-fit: cover;                    /* 余白ゼロ（必要ならトリム） */
+  object-position: var(--focus);        /* ★下端アンカー */
+  pointer-events: none;
+}
+
+/* 中央UI：下の猫に被らないように安全域を確保 */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-content:center; text-align:center;
+  padding: clamp(16px, 4vw, 40px);
+  padding-bottom: var(--safe-bottom);    /* ★下方向に余白を追加 */
+}
+
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px);
+  line-height: 1.2; margin: 0 0 .6em;
+}
+#top.hero-cover .hero-ui p{
+  font-size: clamp(14px, 2.6vw, 18px);
+  color:#4b5563; margin: 0 0 1.2em;
+}
+
+/* LINEボタン：巨大化防止（そのまま） */
+#top.hero-cover .btn-line{
+  display:inline-block; white-space:nowrap;
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(10px, 1.1vw, 14px) clamp(18px, 2vw, 26px);
+  border-radius: 9999px; line-height:1;
+  width:auto; max-width: 360px;
+  margin-bottom: calc(var(--safe-bottom) - 16px);
+}
+
+
+/* ==== Full-bleed Hero（下端優先） ==== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --focus: 50% 100%;                      /* 画像の重心：下端固定 */
+  --safe-bottom: clamp(80px, 12vh, 180px);/* 猫に被らない下余白 */
+}
+
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background-image: none !important;
+}
+@supports not (height:1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* 古いヒーロー要素が残っていても #top では非表示（重複防止） */
+#top.hero-cover::before,
+#top.hero-cover::after{ content:none !important; }
+#top.hero-cover > :not(.hero-media):not(.hero-ui){ display:none !important; }
+
+/* 背景：全面表示＋下端優先（猫を切らない） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%; display:block;
+  object-fit: cover;
+  object-position: var(--focus);
+  pointer-events:none;
+}
+
+/* 中央UI（縦並び） */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap: clamp(12px, 1.6vw, 18px);
+  text-align:center;
+  padding: clamp(16px, 4vw, 40px);
+  padding-bottom: var(--safe-bottom);      /* 猫に被らない */
+}
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 6vw, 52px);
+  line-height:1.2; margin:0;
+}
+#top.hero-cover .hero-ui .lead{
+  font-size: clamp(14px, 2.6vw, 18px);
+  color:#4b5563;
+  background: rgba(255,255,255,.78);      /* 背景の模様上でも読みやすい */
+  backdrop-filter: blur(6px);
+  padding: .45em .9em; border-radius: 12px;
+}
+
+/* LINEボタンは巨大化しないよう制御 */
+#top.hero-cover .btn-line{
+  display:inline-block; white-space:nowrap;
+  font-size: clamp(14px, 1.1vw, 18px);
+  padding: clamp(10px, 1.1vw, 14px) clamp(18px, 2vw, 26px);
+  border-radius: 9999px; line-height:1;
+  width:auto; max-width: 360px;
+}
+
+/* 「説明文の下」に置く画像（透過SVGを想定） */
+#top.hero-cover .hero-badges{ display:block; margin-top: clamp(8px, 2.4vw, 20px); }
+#top.hero-cover .hero-badges img{
+  display:block; width: min(960px, 86%); height:auto;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
+}
+
+
+/* --- Heroテキストの位置ノブ（#top専用） --- */
+:root{
+  --ui-shift-y: 6vh;                 /* 下向きオフセット（+で下に、-で上に） */
+  --hero-top-safe: clamp(32px, 8vh, 120px); /* 上側の安全域（固定ヘッダー分も含める） */
+  /* 固定ヘッダーがあるなら、その高さを入れてもOK → 例: 64px */
+  --header-h: 0px;                   /* 例: 64px にするとさらに下がる */
+}
+
+/* 中央ブロックを下にずらし、上に余白を足す（上部切れ防止） */
+#top.hero-cover .hero-ui{
+  translate: 0 var(--ui-shift-y) !important;
+  padding-top: calc(var(--hero-top-safe) + var(--header-h)) !important;
+  /* もしまだ上に寄るなら ↓ を有効に（中央寄せ→上寄せにして明示的に下げる）
+     justify-content: flex-start;
+  */
+}
+
+/* モバイルでは少し戻す例 */
+@media (max-width: 768px){
+  :root{ --ui-shift-y: 2vh; --hero-top-safe: clamp(24px, 6vh, 96px); }
+}
+
+
+/* ===== #top ヒーローのバランス調整 ===== */
+:root{
+  /* テキスト塊の上下位置（+で下げる） */
+  --ui-shift-y: 2.5vh;
+
+  /* 猫との距離：大きくするとバッジが猫から離れる */
+  --safe-bottom: clamp(110px, 15vh, 220px);
+
+  /* 縦の基本間隔（見出し↔説明↔ボタン↔バッジ） */
+  --ui-gap: clamp(8px, 1.2vw, 16px);
+
+  /* バッジの横幅（小さくして圧迫感を減らす） */
+  --badges-w: clamp(520px, 46vw, 680px);
+
+  /* 見出しの最大幅（行が長すぎるのを防ぐ） */
+  --h1-max: min(980px, 86vw);
+
+  /* 説明文の最大幅 */
+  --lead-max: min(720px, 80vw);
+}
+
+/* テキスト塊の位置と幅 */
+#top.hero-cover .hero-ui{
+  translate: 0 var(--ui-shift-y);
+  padding-bottom: var(--safe-bottom);            /* 猫との距離 */
+  gap: var(--ui-gap);
+  align-items: center;
+  max-width: min(1100px, 92vw);
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* 見出し：行長とサイズを少し抑える */
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 5.4vw, 48px);          /* ← 52px → 48px に下げる */
+  max-width: var(--h1-max);
+  margin: 0 auto .2em;
+  text-wrap: balance;
+}
+
+/* 説明文プレート：幅と余白を控えめに */
+#top.hero-cover .hero-ui .lead{
+  max-width: var(--lead-max);
+  margin: 0 auto;
+  padding: .32em .8em;                           /* ほんの少し薄く */
+}
+
+/* バッジ画像：小さめ＆中央 */
+#top.hero-cover .hero-badges{
+  margin-top: clamp(4px, 1vw, 12px);
+}
+#top.hero-cover .hero-badges img{
+  width: var(--badges-w);
+  height: auto;
+  display: block;
+  margin-inline: auto;
+}
+
+/* 1200px以上でさらに整える（任意） */
+@media (min-width: 1200px){
+  :root{
+    --ui-shift-y: 3vh;          /* もう少し下げたい場合は 4vh まで */
+    --badges-w: clamp(560px, 42vw, 640px);
+  }
+}
+
+
+
+/* ===== 入場直後だけ：上下は必ず全表示（左右だけトリム） ===== */
+/* ヒーローの高さ（未設定なら有効に） */
+#top.hero-cover{ height: clamp(560px, 72svh, 900px); position: relative; overflow: hidden; }
+@supports not (height:1svh){ #top.hero-cover{ height: clamp(560px, 72vh, 900px); } }
+
+/* 通常は cover（下端優先） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%;
+  object-fit: cover;                 /* 余白ゼロ */
+  object-position: 50% 100%;         /* 下端優先（猫を切らない） */
+  display:block; pointer-events:none;
+}
+
+/* ★入場直後フラグ is-intro のときだけ、高さフィット＝上下は必ず見える */
+#top.hero-cover.is-intro .hero-media > img{
+  width: auto !important;
+  height: 100% !important;           /* ←ここが肝 */
+  max-width: none !important;
+  position: absolute !important; top: 0 !important; left: 50% !important;
+  transform: translateX(-50%) !important;   /* 左右の中心に */
+  object-fit: contain !important;     /* 念のため */
+}
+
+
+/* === HERO (final) =============================== */
+:root{
+  --hero-min: 560px;
+  --hero-max: 900px;
+  --hero-letterbox:#ececec;              /* レターボックスの色（許容） */
+  --focus: 50% 100%;                     /* 画像の重心：底面固定（猫を切らない） */
+  --safe-bottom: clamp(80px,12vh,180px); /* 猫に被らない余白 */
+}
+
+/* コンテナ */
+#top.hero-cover{
+  position: relative;
+  height: clamp(var(--hero-min), 72svh, var(--hero-max));
+  min-height: var(--hero-min);
+  overflow: hidden;
+  isolation: isolate;
+  background: none !important;
+}
+@supports not (height:1svh){
+  #top.hero-cover{ height: clamp(var(--hero-min), 72vh, var(--hero-max)); }
+}
+
+/* 背景画像（通常は cover＋底面優先） */
+#top.hero-cover .hero-media{ position:absolute; inset:0; z-index:0; }
+#top.hero-cover .hero-media > img{
+  width:100%; height:100%; display:block;
+  object-fit: cover;
+  object-position: var(--focus);
+  pointer-events:none;
+  background: var(--hero-letterbox);     /* 万一の余白色 */
+}
+
+/* 中央UI */
+#top.hero-cover .hero-ui{
+  position:absolute; inset:0; z-index:2;
+  display:grid; place-content:center; text-align:center;
+  gap:clamp(12px,1.6vw,18px);
+  padding: clamp(16px, 4vw, 40px);
+  padding-bottom: var(--safe-bottom);
+}
+#top.hero-cover .hero-ui h1{
+  font-size: clamp(24px, 5.4vw, 48px);
+  line-height: 1.2; margin: 0;
+}
+#top.hero-cover .hero-ui .lead{
+  font-size: clamp(14px, 2.6vw, 18px);
+  color:#4b5563;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(6px);
+  padding:.45em .9em; border-radius:12px; margin:0;
+}
+/* 説明文の下の透過SVG（バッジ） */
+#top.hero-cover .hero-badges{ display:block; margin-top: clamp(6px, 1.6vw, 16px); }
+#top.hero-cover .hero-badges img{
+  width: min(960px, 86%); height:auto; display:block; margin-inline:auto;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
+}
+
+/* ★ 入場直後：上下は必ず全部見せる（左右はトリム or 余白OK）＋画面いっぱい */
+#top.hero-cover.is-intro{ height: 100dvh !important; background: var(--hero-letterbox); }
+@supports not (height:100dvh){ #top.hero-cover.is-intro{ height: 100vh !important; } }
+#top.hero-cover.is-intro .hero-media > img{
+  width:auto !important; height:100% !important; max-width:none !important;
+  object-fit: contain !important; object-position:50% 50% !important;
+  position:absolute !important; left:50% !important; top:0 !important;
+  transform: translateX(-50%) !important;
+}
+/* ================================================ */
+
+
+/* ===== Paw to Top (右下肉球) ===== */
+.paw-top{
+  --size: 84px;
+  --pad: 12px;                /* 画面端からの距離 */
+  --bottom-extra: 0px;        /* JSで下部CTA分を加算 */
+
+  position: fixed;
+  right: clamp(10px, 2vw, 20px);
+  bottom: calc(clamp(10px, 2.4vh, 20px) + var(--bottom-extra));
+  z-index: 1200;
+  width: var(--size);
+  height: var(--size);
+  display: grid;
+  place-items: center;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  /* 表示/非表示（初期は非表示） */
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(.92);
+  transition:
+    opacity .25s ease,
+    transform .15s ease,
+    box-shadow .25s ease;
+}
+.paw-top.is-show{
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+.paw-top img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.22));
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ぷにっ（ホバー） */
+@keyframes paw-puni {
+  0%   { transform: scale(1); }
+  60%  { transform: scale(1.12); }
+  100% { transform: scale(1.04); }
+}
+.paw-top:hover{
+  animation: paw-puni .18s cubic-bezier(.2,.9,.2,1) both;
+  box-shadow: none;
+}
+.paw-top:active{ transform: scale(.96); }
+
+/* モバイルは少し小さめ */
+@media (max-width: 768px){
+  .paw-top{ --size: 56px; }
+}
+
+/* 動きが苦手な人向け配慮 */
+@media (prefers-reduced-motion: reduce){
+  .paw-top,
+  .paw-top:hover{ animation: none !important; transition: none !important; }
+}
+
+
+.paw-top{ display:grid !important; z-index:4000 !important; }
+
+
+/* トップへ戻るときはスクロールアンカーを無効化して押し下げを防ぐ */
+ html.scrolling-to-top,
+ body.scrolling-to-top{
+   overflow-anchor: none;
+   scroll-behavior: auto;  /* グローバルの smooth を一時停止 */
+ }
