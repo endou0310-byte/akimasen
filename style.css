@@ -1911,3 +1911,9 @@ section, .lp-band, .lp-section{ position:relative; z-index:10; }
    overflow-anchor: none;
    scroll-behavior: auto;  /* グローバルの smooth を一時停止 */
  }
+
+ /* ヒーローの高さが滑らかに変わるように */
+#top.hero-cover { transition: height .35s ease; }
+/* 初回/上端付近はほぼ全画面表示に */
+#top.hero-cover.is-intro { height: 92svh; }
+/* 通常時の高さは既存の clamp(...) 指定をそのまま利用でOK */
