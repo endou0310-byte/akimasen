@@ -2499,3 +2499,18 @@ button.lp-btn.lp-btn-outline:focus{
 
 /* カードの上下パディングは据え置き（必要なら微調整） */
 /* .nayami--compact .nayami-card{ padding-top:16px; padding-bottom:18px; } */
+
+/* === #eligibility：LINEボタンの余白をスリム化（SP中心） === */
+@media (max-width: 600px){
+  /* パネルの下側だけ少し詰める */
+  #eligibility .lp-cta-panel{ padding-bottom: 14px; }
+
+  /* ボタン内の余白を調整：文字まわりを小さめに、アイコン右のダミーを削除 */
+  #eligibility .lp-btn-line{
+    padding: 12px 16px;   /* 既存より縦横とも少しタイト */
+    font-size: 15px;
+    gap: 8px;             /* 文字とアイコンの間隔 */
+  }
+  #eligibility .lp-btn-line::before{ width: 16px; height: 16px; } /* アイコンも少し小さく */
+  #eligibility .lp-btn-line::after{ display: none; }              /* 右側のダミー余白カット */
+}
