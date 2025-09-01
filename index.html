@@ -21,10 +21,13 @@
 
   <!-- 中央ブロック：見出し → 説明文 → ボタン → 画像（この順で縦並び） -->
   <div class="hero-ui">
-    <h1>退職後の生活を安心に。<br>受給期間を <mark>最⼤28ヶ月</mark> まで延長できます</h1>
+    <h1>退職後の生活を安心に。<br><span class="mk-underline mk-sakura">最大28ヶ月</span> まで延長できます</h1>
 
     <p class="lead">専門スタッフがあなたの状況に合わせて制度活用をサポート。<br>まずはLINEでご相談ください。</p>
-    
+    <!-- 追加：ヒーロー用LINEボタン -->
+<a class="lp-btn lp-btn-line lp-btn-lg hero-cta"
+   href="https://line.me/R/ti/p/@YOUR_ID?ref=hero"
+   target="_blank" rel="noopener">LINEで無料相談</a>
       <!-- ↓ この画像が「説明文の下」に表示されます（透過SVG推奨） -->
     <picture class="hero-badges">
       <source media="(max-width:768px)" srcset="img/nekkosheroSP_art.svg">
@@ -34,25 +37,19 @@
 </section>
 
 
-
-
-
-
 <!-- 全体背景レイヤー：ヒーローの下から表示 -->
 <div class="site-bg site-bg--BG1" aria-hidden="true"></div>
-
-
 
 <!-- ====== ほとんどの方が申請できておりません。 ====== -->
 <section id="awareness" class="lp-band lp-awareness" aria-label="認知・申請状況">
   <div class="lp-container">
     <h2 class="lp-title">ほとんどの方が<span class="lp-underline">申請できておりません</span></h2>
-    <div class="lp-grid-2 lp-gap-lg">
-      <div class="lp-card">
+    <div class="lp-grid-2 lp-gap-lg reveal-stagger">
+      <div class="lp-card" data-reveal="up">
         <p>当社では 累計2,700名以上のご相談実績。ですが、<strong>退職後の社会保険給付金をご存知だった方は1割もいません。</strong></p>
         <p>また、全国健康保険協会加入者の支給対象者に対し、実際の支給人数は<strong>約0.5％</strong>。制度が複雑で、労働者に十分認知されていないことが主因です。</p>
       </div>
-      <div class="lp-card">
+      <div class="lp-card" data-reveal="up">
         <div class="lp-bars">
           <div class="lp-bar-row">
             <span class="lp-bar-label">支給対象者</span>
@@ -73,13 +70,13 @@
 <!-- ====== 受給対象か確認CTA（awareness直後） ====== -->
 <section id="eligibility" class="lp-band lp-eligibility" aria-label="受給対象か確認">
   <div class="lp-container">
-    <div class="lp-cta-panel">
-      <h3 class="lp-cta-h">あなたが社会保険の受給対象か、確認しませんか？</h3>
-      <p class="lp-cta-p">
+    <div class="lp-cta-panel" data-reveal="up">
+      <h3 class="lp-cta-h" data-reveal="up">あなたが社会保険の受給対象か、確認しませんか？</h3>
+      <p class="lp-cta-p" data-reveal="up">
         在職／退職の状況や加入歴を簡単にヒアリングし、制度の範囲で最適な進め方をご案内します。
         ご相談は<strong>無料・匿名でもOK</strong>です。
       </p>
-      <div class="lp-center">
+      <div class="lp-center" data-reveal="up">
         <a class="lp-btn lp-btn-line lp-btn-lg"
            href="https://line.me/R/ti/p/@YOUR_ID?ref=awareness-cta"
            target="_blank" rel="noopener">
@@ -91,29 +88,29 @@
 </section>
 
 <!-- ===== Problems (お悩み) ===== -->
-<section class="nayami">
+<section class="nayami nayami--compact">
   <h2 class="section-title">こんなお悩みはありませんか？</h2>
 
-  <div class="nayami-list">
-    <article class="nayami-card">
+  <div class="nayami-list reveal-stagger">
+    <article class="nayami-card" data-reveal="up">
       <img src="img/nayami.png" alt="手続きが複雑で不安">
       <h3>手続きが複雑で不安</h3>
       <p>まず何から始めれば良いか分からない</p>
     </article>
 
-    <article class="nayami-card">
+    <article class="nayami-card" data-reveal="up">
       <img src="img/nayami2.png" alt="時間や手間を最小にしたい">
       <h3>時間や手間を最小にしたい</h3>
       <p>オンラインでスムーズに済ませたい</p>
     </article>
 
-    <article class="nayami-card">
+    <article class="nayami-card" data-reveal="up">
       <img src="img/nayami3.png" alt="条件に当てはまるか心配">
       <h3>条件に当てはまるか心配</h3>
       <p>自分の状況でも対象になるのか知りたい</p>
     </article>
 
-    <article class="nayami-card">
+    <article class="nayami-card" data-reveal="up">
       <img src="img/nayami4.png" alt="まずは相談だけしたい">
       <h3>まずは相談だけしたい</h3>
       <p>費用は？どのくらい延長できる？を聞きたい</p>
@@ -122,12 +119,12 @@
 </section>
 
 <!-- ===== Flow（ご利用の流れ） ===== -->
-<section class="band band--white flow" id="flow" data-reveal>
+<section class="band band--white flow" id="flow">
   <div class="container">
     <h2 class="section-title">ご利用の流れ</h2>
 
-    <ol class="steps-grid" aria-label="ご利用の流れ">
-      <li class="step-card" data-reveal="left">
+    <ol class="steps-grid reveal-stagger" aria-label="ご利用の流れ">
+      <li class="step-card fx-lift" data-reveal="up">
         <span class="step-num">1</span>
         <h3 class="step-title">無料相談</h3>
         <p class="step-desc">LINEまたはフォームから状況をヒアリング。所要時間は数分です。</p>
@@ -136,19 +133,19 @@
         </div>
       </li>
 
-      <li class="step-card" data-reveal="left">
+      <li class="step-card fx-lift" data-reveal="up">
         <span class="step-num">2</span>
         <h3 class="step-title">条件確認</h3>
         <p class="step-desc">受給条件に当てはまるかを確認。必要な書類や進め方をご案内します。</p>
       </li>
 
-      <li class="step-card" data-reveal="left">
+      <li class="step-card fx-lift" data-reveal="up">
         <span class="step-num">3</span>
         <h3 class="step-title">申請サポート</h3>
         <p class="step-desc">申請の進め方・提出順序を丁寧にサポート。オンラインで完結します。</p>
       </li>
 
-      <li class="step-card" data-reveal="left">
+      <li class="step-card fx-lift" data-reveal="up">
         <span class="step-num">4</span>
         <h3 class="step-title">受給開始・フォロー</h3>
         <p class="step-desc">受給開始後も不明点はチャットでフォロー。変更や更新も安心です。</p>
@@ -177,14 +174,14 @@
 
 
     <!-- 3特徴 -->
-    <div class="lp-grid-3 lp-mb20">
-      <article class="lp-card"><h3 class="lp-h3">制度に強い</h3><p>健康保険・雇用保険を横断し、状況に合わせた最適化を提案。</p></article>
-      <article class="lp-card"><h3 class="lp-h3">オンライン完結</h3><p>全国対応。LINEとオンライン面談でスムーズに進行。</p></article>
-      <article class="lp-card"><h3 class="lp-h3">見通しを可視化</h3><p>想定受給額・期間の見立てをわかりやすく提示。</p></article>
+    <div class="lp-grid-3 lp-mb20 reveal-stagger">
+      <article class="lp-card fx-lift" data-reveal="up"><h3 class="lp-h3">制度に強い</h3><p>健康保険・雇用保険を横断し、状況に合わせた最適化を提案。</p></article>
+      <article class="lp-card fx-lift" data-reveal="up"><h3 class="lp-h3">オンライン完結</h3><p>全国対応。LINEとオンライン面談でスムーズに進行。</p></article>
+      <article class="lp-card fx-lift" data-reveal="up"><h3 class="lp-h3">見通しを可視化</h3><p>想定受給額・期間の見立てをわかりやすく提示。</p></article>
     </div>
 
     <!-- 返金保証 -->
-    <div class="lp-card lp-guarantee">
+<div class="lp-card lp-guarantee" data-reveal="up">
       <p class="lp-lead"><strong>ご案内に沿ってお手続きいただいたのに給付が増えなかった場合、全額返金いたします。</strong></p>
       <ul class="lp-list">
         <li>必要書類／期限の遵守、虚偽申告がないこと</li>
@@ -200,7 +197,7 @@
 
 <section id="lead-consult" class="lp-mb24">
   <div class="lp-container">
-    <div class="lp-card lp-center lp-py20">
+    <div class="lp-card lp-center lp-py20" data-reveal="up">
       <h2 class="lp-h2 lp-mb8">条件は人によって変わります。まずは無料でご相談ください。</h2>
       <p class="lp-text-muted lp-mb12">在籍中のご相談からOK。最適な進め方を個別にご案内します。</p>
 
@@ -228,9 +225,9 @@
   <div class="lp-container">
     <h2 class="lp-title">ご利用者様の声</h2>
 
-    <div class="lp-voice-list">
+    <div class="lp-voice-list reveal-stagger">
       <!-- 具体数値のある事例（参考元の冒頭3 + 既存3） -->
-      <article class="lp-voice-case">
+      <article class="lp-voice-case fx-lift" data-reveal="up">
         <header class="lp-voice-head is-avatar">
           <h3 class="lp-voice-name">Y.Oさん（20代男性・物流）</h3>
           <ul class="lp-voice-metrics">
@@ -242,7 +239,7 @@
         <p class="lp-voice-text">毎月の受給で暮らしが安定し、将来の準備に集中できました。</p>
       </article>
 
-      <article class="lp-voice-case">
+      <article class="lp-voice-case fx-lift" data-reveal="up">
         <header class="lp-voice-head is-avatar">
           <h3 class="lp-voice-name">K.Tさん（30代男性・営業）</h3>
           <ul class="lp-voice-metrics">
@@ -254,7 +251,7 @@
         <p class="lp-voice-text">手続きの不安がなくなり、前向きに生活の立て直しができました。</p>
       </article>
 
-      <article class="lp-voice-case">
+      <article class="lp-voice-case fx-lift" data-reveal="up">
         <header class="lp-voice-head is-avatar">
           <h3 class="lp-voice-name">T.Rさん（40代男性・接客）</h3>
           <ul class="lp-voice-metrics">
@@ -266,7 +263,7 @@
         <p class="lp-voice-text">必要な流れを丁寧に教えてもらい、安心して進められました。</p>
       </article>
 
-      <article class="lp-voice-case">
+      <article class="lp-voice-case fx-lift" data-reveal="up">
         <header class="lp-voice-head is-avatar">
           <h3 class="lp-voice-name">A.Iさん（30代男性・研究開発）</h3>
           <ul class="lp-voice-metrics">
@@ -278,7 +275,7 @@
         <p class="lp-voice-text">制度が複雑でも、伴走があることで不安なく進められました。</p>
       </article>
 
-      <article class="lp-voice-case">
+      <article class="lp-voice-case fx-lift" data-reveal="up">
         <header class="lp-voice-head is-avatar">
           <h3 class="lp-voice-name">R.Iさん（20代男性・運送）</h3>
           <ul class="lp-voice-metrics">
@@ -290,7 +287,7 @@
         <p class="lp-voice-text">手続きがスムーズで、生活面の不安がぐっと減りました。</p>
       </article>
 
-      <article class="lp-voice-case">
+      <article class="lp-voice-case fx-lift" data-reveal="up">
         <header class="lp-voice-head is-avatar">
           <h3 class="lp-voice-name">T.Mさん（20代女性・ネットショップ運営）</h3>
           <ul class="lp-voice-metrics">
@@ -456,6 +453,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   /* ========== ご利用者様の声：絞り込み + もっと見る ========== */
   (function(){
+    if (window.__voices_inited) return; window.__voices_inited = true;
+
     const list  = document.querySelector('#voices .lp-voice-list') || document.getElementById('voiceList');
     if (!list) return;
 
@@ -483,8 +482,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (more) more.addEventListener('click', () => { visible += 5; apply(); });
   })();
 
-  /* ========== ヒーロー：双方向トグル（上端付近は全画面に戻す） ========== */
+  /* ========== ヒーロー：上端付近は全画面に戻す ========== */
   (function(){
+    if (window.__hero_intro_inited) return; window.__hero_intro_inited = true;
+
     const hero = document.querySelector('#top.hero-cover');
     if (!hero) return;
 
@@ -493,76 +494,130 @@ document.addEventListener('DOMContentLoaded', () => {
       else hero.classList.remove('is-intro');
     };
 
-    // 初期適用 + 監視
     applyHero();
     window.addEventListener('scroll', applyHero, { passive: true });
     window.addEventListener('resize', applyHero, { passive: true });
-
-    // 他ブロックから再評価したい時用（任意）
     window.__applyHeroIntro = applyHero;
   })();
 
-  /* ========== 肉球：右下表示 + クリックで最上部へ戻る ========== */
-  (function(){
-    const btn = document.querySelector('.paw-top');
-    if (!btn) return;
+  /* ========== 肉球：右下表示 + クリックで最上部へ戻る（安全版） ========== */
+  (function initPaw(){
+    if (window.__paw_inited) return;
 
-    const sticky  = document.querySelector('.lp-sticky-cta');
-    const SHOW_AT = 240;
+    const find = () => document.querySelector('.paw-top');
 
-    const reposition = () => {
-      let extra = 0;
-      if (sticky && getComputedStyle(sticky).display !== 'none') {
-        extra = sticky.getBoundingClientRect().height + 12;
-      }
-      btn.style.setProperty('--bottom-extra', `${extra}px`);
-    };
+const setup = (btn) => {
+  // <img> 単体なら <a.paw-top> で包む（擬似要素やクリック領域安定のため）
+  if (btn.tagName && btn.tagName.toLowerCase() === 'img') {
+    const wrap = document.createElement('a');
+    wrap.className = 'paw-top';
+    wrap.href = '#top';
+    wrap.setAttribute('aria-label', 'トップへ');
+    btn.replaceWith(wrap);
+    wrap.appendChild(btn);
+    btn = wrap;
+  }
 
-    const onScroll = () => {
-      if (window.scrollY > SHOW_AT) btn.classList.add('is-show');
-      else btn.classList.remove('is-show');
-      reposition();
-    };
+  // きらり用の要素は作らない（使わない設計）
+  // もし残骸があれば自然に無視されます（CSSで display:none 済み）
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+  if (window.__paw_inited) return;
+  window.__paw_inited = true;
 
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const html = document.documentElement;
-      const body = document.body;
+  const sticky  = document.querySelector('.lp-sticky-cta');
+  const SHOW_AT = 240;
 
-      html.classList.add('scrolling-to-top');
-      body.classList.add('scrolling-to-top');
+  const reposition = () => {
+    let extra = 0;
+    if (sticky && getComputedStyle(sticky).display !== 'none') {
+      extra = sticky.getBoundingClientRect().height + 12;
+    }
+    btn.style.setProperty('--bottom-extra', `${extra}px`);
+  };
 
-      // ★ここで is-intro をいじらない（削除した2行）
-      // const hero = document.querySelector('#top.hero-cover');
-      // if (hero) hero.classList.remove('is-intro');
+  const onScroll = () => {
+    if (window.scrollY > SHOW_AT) btn.classList.add('is-show');
+    else btn.classList.remove('is-show');
+    reposition();
+  };
 
-      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', reposition, { passive: true });
+  onScroll();
 
-      // スクロール完了後にヒーロー状態を再評価（任意だが安心）
-      const done = () => {
-        if (window.scrollY <= 0) {
-          html.classList.remove('scrolling-to-top');
-          body.classList.remove('scrolling-to-top');
-          window.removeEventListener('scroll', done);
-          if (window.__applyHeroIntro) window.__applyHeroIntro();
-        }
-      };
-      window.addEventListener('scroll', done, { passive: true });
+  // ぷにっ（押下で一瞬 is-poke を付与 → 自動で解除）
+  const poke = () => {
+    btn.classList.add('is-poke');
+    const clear = () => btn.classList.remove('is-poke');
+    // アニメ終了で確実に戻す（念のためタイムアウトも）
+    btn.addEventListener('animationend', clear, { once: true });
+    setTimeout(clear, 260);
+  };
+  btn.addEventListener('pointerdown', poke, { passive: true });
 
-      // 念のためのタイムアウト
-      setTimeout(() => {
-        html.classList.remove('scrolling-to-top');
-        body.classList.remove('scrolling-to-top');
+  // クリックでスムースに最上部へ
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+
+    const done = () => {
+      if (window.scrollY <= 0) {
+        window.removeEventListener('scroll', done);
         if (window.__applyHeroIntro) window.__applyHeroIntro();
-      }, reduce ? 0 : 1200);
+      }
+    };
+    window.addEventListener('scroll', done, { passive: true });
+    setTimeout(() => { if (window.__applyHeroIntro) window.__applyHeroIntro(); }, reduce ? 0 : 1200);
+  });
+};
+
+
+
+    const now = find();
+    if (now) { setup(now); return; }
+
+    // DOMに追加されるのを待つ（最大5秒）
+    const mo = new MutationObserver(() => {
+      const el = find();
+      if (el) { mo.disconnect(); setup(el); }
     });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(() => mo.disconnect(), 5000);
   })();
-});
+
+}); 
 </script>
+
+<script>
+(() => {
+  const els = document.querySelectorAll('[data-reveal]');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 非対応 or reduce-motion は即表示
+  if (reduce || !('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('is-in'));
+    return;
+  }
+
+  // 親に .reveal-stagger が付いている場合、子に --i を自動付与
+  document.querySelectorAll('.reveal-stagger').forEach(group=>{
+    Array.from(group.children).forEach((ch,i)=>ch.style.setProperty('--i', i));
+  });
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting){
+        e.target.classList.add('is-in');
+        io.unobserve(e.target); // 一度だけ
+      }
+    });
+  }, { threshold:.14, rootMargin:'0px 0px -10% 0px' });
+
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
 
 
 </body>
