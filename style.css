@@ -2514,3 +2514,41 @@ button.lp-btn.lp-btn-outline:focus{
   #eligibility .lp-btn-line::before{ width: 16px; height: 16px; } /* アイコンも少し小さく */
   #eligibility .lp-btn-line::after{ display: none; }              /* 右側のダミー余白カット */
 }
+
+/* ===== ウォッシュ（白の上に乗せる水彩オーバーレイ） ===== */
+.wash{
+  position: relative;
+  overflow: hidden;
+}
+.wash::after{
+  content:"";
+  position:absolute;
+  /* 枠線と角丸を邪魔しないよう少し内側に敷く */
+  inset: 6px;
+  border-radius: calc(var(--radius,16px) - 6px);
+  pointer-events:none;
+  z-index: 0; /* 背景の上・本文の下 */
+
+  /* やさしい赤みの水彩：左下＆右上ににじませる */
+  background:
+    radial-gradient(180px 120px at 12% 100%, hsl(6 85% 78% / .22), transparent 60%),
+    radial-gradient(160px 110px at 100% 0%,  hsl(16 82% 76% / .18), transparent 62%),
+    linear-gradient(180deg, transparent 0%, hsl(0 0% 100% / 0) 100%);
+}
+/* 本文は上に */
+.wash > *{
+  position: relative;
+  z-index: 1;
+}
+
+
+/* 下線マーカー共通 */
+.mk-underline{ position:relative; z-index:1; display:inline; padding:0 .06em; }
+.mk-underline::after{
+  content:""; position:absolute; z-index:-1;
+  left:-.18em; right:-.18em; bottom:.08em; height:.58em; /* 太さ・位置はお好みで */
+  background: var(--mk, rgba(30,144,255,.28)); border-radius:.36em;
+}
+/* 青トーン（やさしめ） */
+.mk-azure{ --mk: hsl(207 85% 62% / .32); }
+/* 太い/細いにしたい時は height を .50em〜.64em、位置は bottom を .06〜.12em で微調整 */
