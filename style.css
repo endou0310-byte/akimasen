@@ -2552,3 +2552,15 @@ button.lp-btn.lp-btn-outline:focus{
 /* 青トーン（やさしめ） */
 .mk-azure{ --mk: hsl(207 85% 62% / .32); }
 /* 太い/細いにしたい時は height を .50em〜.64em、位置は bottom を .06〜.12em で微調整 */
+
+
+/* === スマホで「約3人に1人」を1行表示に === */
+@media (max-width: 768px){
+  .lp-stat-num{
+    white-space: nowrap;   /* 自動改行を禁止 */
+    font-size: 28px;       /* 少し縮める（必要なら調整） */
+  }
+  .lp-stat-num span{
+    font-size: 1.2em;      /* 中の数字も相対的に調整 */
+  }
+}
