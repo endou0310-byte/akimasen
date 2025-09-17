@@ -628,6 +628,46 @@ const setup = (btn) => {
 })();
 </script>
 
+<script>
+(() => {
+  // 1) 先方指定の LIFF ベースURL（lpは付けない）
+  const BASE = "https://liff.line.me/2007950780-w01jYn2k/landing?follow=%40666hbltb&liff_id=2007950780-w01jYn2k";
+
+  // 2) ref(=流入ラベル) → LIFFのlpコード へのマッピング（Excelどおり）
+  const LP_CODE_MAP = {
+    AFF:    "GPRS2W",
+    SA:     "9QEBXF",
+    TO:     "ibz4wI",
+    SEO:    "7csi47",
+    DIRECT: "rUpeYw",
+  };
+  const OK = new Set(Object.keys(LP_CODE_MAP));
+
+  // 3) URLから ?ref= を取得（無ければパス末尾→ それでも無ければ DIRECT）
+  const url = new URL(location.href);
+  let ref = (url.searchParams.get("ref")
+             || url.pathname.split("/").filter(Boolean).pop()
+             || "").toUpperCase();
+  if (!OK.has(ref)) ref = "DIRECT";
+
+  // 4) LIFFの lp= を “マッピング後のコード” で付与
+  //    ついでに元の ref も渡したいなら u.searchParams.set('ref', ref) で同送可能
+  const lpCode = LP_CODE_MAP[ref];
+  document.querySelectorAll('a.lp-btn-line, a.btn.line').forEach(a => {
+    try {
+      const u = new URL(BASE);
+      u.searchParams.set("lp", lpCode);
+      // 任意：解析用にオリジナルrefも同送したい場合は↓の1行をON
+      // u.searchParams.set("ref", ref);
+      a.href = u.toString();
+      a.target = "_blank";
+      a.rel = "noopener";
+    } catch(e) {/* 無効URLは無視 */}
+  });
+})();
+</script>
+
+
 
 </body>
 </html>
